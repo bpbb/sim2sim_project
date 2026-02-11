@@ -1,0 +1,22 @@
+Go2 DR Comparison Summary
+============================================================
+
+--- BASELINE ---
+  Forward          success=100.0%  RMSE(vx=0.482 vy=0.047 wz=0.180)  steps=500
+  Backward         success=  0.0%  RMSE(vx=0.371 vy=0.236 wz=0.941)  steps=286
+  Left             success=100.0%  RMSE(vx=0.051 vy=0.492 wz=0.559)  steps=500
+  Right            success=  0.0%  RMSE(vx=0.320 vy=0.475 wz=1.347)  steps=52
+  Turn_Left        success=100.0%  RMSE(vx=0.008 vy=0.009 wz=0.485)  steps=500
+  Turn_Right       success=100.0%  RMSE(vx=0.006 vy=0.007 wz=0.488)  steps=500
+  Diagonal         success=  0.0%  RMSE(vx=0.240 vy=0.446 wz=0.535)  steps=67
+  Circle           success=100.0%  RMSE(vx=0.471 vy=0.057 wz=0.392)  steps=500
+
+--- MODERATE ---
+  Forward          success=100.0%  RMSE(vx=0.485 vy=0.046 wz=0.161)  steps=500
+  Backward         success=100.0%  RMSE(vx=0.472 vy=0.151 wz=0.660)  steps=500
+  Left             success=  0.0%  RMSE(vx=0.140 vy=0.449 wz=1.001)  steps=214
+  Right            success=  0.0%  RMSE(vx=0.321 vy=0.475 wz=1.347)  steps=52
+  Turn_Left        success=100.0%  RMSE(vx=0.011 vy=0.011 wz=0.485)  steps=500
+  Turn_Right       success=100.0%  RMSE(vx=0.052 vy=0.109 wz=0.453)  steps=500
+  Diagonal         success=  0.0%  RMSE(vx=0.227 vy=0.510 wz=0.498)  steps=66
+  Circle           success=100.0%  RMSE(vx=0.480 vy=0.051 wz=0.471)  steps=500

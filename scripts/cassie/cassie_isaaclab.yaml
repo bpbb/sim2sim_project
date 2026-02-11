@@ -1,0 +1,61 @@
+# Cassie Isaac Lab to MuJoCo deployment config
+#
+# Usage:
+#   python scripts/cassie/deploy_mujoco.py scripts/cassie/cassie_isaaclab.yaml
+#   python scripts/cassie/deploy_mujoco.py scripts/cassie/cassie_isaaclab.yaml --policy /path/to/other/policy.pt
+
+# Policy path (exported TorchScript)
+policy_path: "/home/drl-68/sim2sim_project/logs/cassie/policies/moderate.pt"
+
+# MuJoCo XML model path (scene.xml includes floor — required!)
+xml_path: "/home/drl-68/sim2sim_project/external/agility_cassie/scene.xml"
+
+# Simulation settings
+simulation_duration: 60.0
+simulation_dt: 0.005        # 200 Hz physics
+control_decimation: 4        # 50 Hz control (200/4)
+
+# PD gains per actuator type: [Kp, Kd, effort_limit]
+# These match the Isaac Lab CASSIE_CFG actuator definitions
+pd_gains:
+  hip_abduction: [100.0, 10.0, 200.0]
+  hip_rotation:  [100.0, 10.0, 200.0]
+  hip_flexion:   [200.0, 20.0, 200.0]
+  thigh_joint:   [200.0, 20.0, 200.0]
+  toe_joint:     [20.0,  5.0,  45.0]
+
+# PD Gain Scale (compensate for Implicit vs Explicit PD)
+# Default 10.0 (Kp=2000) was causing instability/explosion.
+# Try 1.0 to match original PPO gains.
+pd_gain_scale: 6.0
+
+# Default joint positions in ISAAC LAB order (12 joints)
+# LEFT:  hip_abd, hip_rot, hip_flex, thigh, ankle(passive), toe
+# RIGHT: hip_abd, hip_rot, hip_flex, thigh, ankle(passive), toe
+default_angles_isaac:
+  - 0.1       # hip_abduction_left
+  - 0.0       # hip_rotation_left
+  - 1.0       # hip_flexion_left
+  - -1.8      # thigh_joint_left (knee)
+  - 1.57      # ankle_joint_left (passive in MuJoCo)
+  - -1.57     # toe_joint_left
+  - -0.1      # hip_abduction_right
+  - 0.0       # hip_rotation_right
+  - 1.0       # hip_flexion_right
+  - -1.8      # thigh_joint_right (knee)
+  - 1.57      # ankle_joint_right (passive in MuJoCo)
+  - -1.57     # toe_joint_right
+
+# Action scale (must match Isaac Lab training config)
+action_scale: 0.5
+
+# Network sizes
+num_actions: 12
+num_obs: 48
+
+# Initial command (vx, vy, yaw_rate)
+# Start with standing (0,0,0) to verify balance before walking
+cmd_init: [0.0, 0.0, 0.0]
+
+# Initial base height (meters)
+initial_height: 0.9

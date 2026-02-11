@@ -1,0 +1,32 @@
+Go2 DR Comparison Summary
+============================================================
+
+--- BASELINE ---
+  Forward          success=100.0%  RMSE(vx=0.407 vy=0.051 wz=0.051)  steps=500
+  Backward         success=100.0%  RMSE(vx=0.463 vy=0.039 wz=0.038)  steps=500
+  Left             success=100.0%  RMSE(vx=0.031 vy=0.424 wz=0.067)  steps=500
+  Right            success=100.0%  RMSE(vx=0.020 vy=0.393 wz=0.074)  steps=500
+  Turn_Left        success=100.0%  RMSE(vx=0.005 vy=0.002 wz=0.497)  steps=500
+  Turn_Right       success=100.0%  RMSE(vx=0.008 vy=0.002 wz=0.499)  steps=500
+  Diagonal         success=100.0%  RMSE(vx=0.442 vy=0.380 wz=0.133)  steps=500
+  Circle           success=100.0%  RMSE(vx=0.407 vy=0.050 wz=0.247)  steps=500
+
+--- MODERATE ---
+  Forward          success=100.0%  RMSE(vx=0.391 vy=0.040 wz=0.052)  steps=500
+  Backward         success=100.0%  RMSE(vx=0.424 vy=0.035 wz=0.043)  steps=500
+  Left             success=100.0%  RMSE(vx=0.039 vy=0.376 wz=0.078)  steps=500
+  Right            success=100.0%  RMSE(vx=0.031 vy=0.373 wz=0.074)  steps=500
+  Turn_Left        success=100.0%  RMSE(vx=0.007 vy=0.004 wz=0.492)  steps=500
+  Turn_Right       success=100.0%  RMSE(vx=0.006 vy=0.002 wz=0.495)  steps=500
+  Diagonal         success=100.0%  RMSE(vx=0.364 vy=0.364 wz=0.093)  steps=500
+  Circle           success=100.0%  RMSE(vx=0.390 vy=0.040 wz=0.246)  steps=500
+
+--- AGGRESSIVE ---
+  Forward          success=100.0%  RMSE(vx=0.410 vy=0.046 wz=0.058)  steps=500
+  Backward         success=100.0%  RMSE(vx=0.376 vy=0.032 wz=0.075)  steps=500
+  Left             success=100.0%  RMSE(vx=0.027 vy=0.355 wz=0.107)  steps=500
+  Right            success=100.0%  RMSE(vx=0.041 vy=0.333 wz=0.089)  steps=500
+  Turn_Left        success=100.0%  RMSE(vx=0.006 vy=0.009 wz=0.469)  steps=500
+  Turn_Right       success=100.0%  RMSE(vx=0.004 vy=0.012 wz=0.493)  steps=500
+  Diagonal         success=100.0%  RMSE(vx=0.322 vy=0.308 wz=0.645)  steps=500
+  Circle           success=100.0%  RMSE(vx=0.407 vy=0.045 wz=0.256)  steps=500

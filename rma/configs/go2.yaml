@@ -1,0 +1,88 @@
+# Go2 RMA Configuration
+# ======================
+# Aligned with Go2 sim2sim baseline/moderate DR configs.
+#
+# RMA Pipeline:
+#   Phase 1: Train policy+encoder in Isaac Lab (uses privileged obs)
+#   Phase 2: Collect (obs_history, privileged) pairs, train adaptation module
+#   Deploy:  Use adaptation module in MuJoCo to estimate env params
+
+robot_name: go2
+num_joints: 12
+
+# Observation dimensions (matches Go2Sim2SimObservationsCfg)
+observations:
+  base_obs_dim: 48  # lin_vel(3)*2.0 + ang_vel(3)*0.25 + gravity(3) + commands(3) + joint_pos(12) + joint_vel(12)*0.05 + actions(12)
+
+# Privileged information (ground truth from simulator)
+# These match the DR parameters in go2_sim2sim_moderate_cfg.py:
+#   - friction: static_friction_range (0.5, 1.5)
+#   - mass:     mass_distribution_params (-0.5, 1.0) kg additive
+#   - gains:    stiffness_distribution_params (0.8, 1.2) scale
+#   - gains:    damping_distribution_params (0.8, 1.2) scale
+privileged_info:
+  dim: 4
+  components:
+    - name: ground_friction_scale
+      dim: 1
+      range: [0.5, 1.5]
+      description: "Ground friction scale factor (moderate DR range)"
+    - name: base_mass_offset
+      dim: 1
+      range: [-0.5, 1.0]
+      description: "Base mass offset in kg (additive, moderate DR)"
+    - name: kp_scale
+      dim: 1
+      range: [0.8, 1.2]
+      description: "PD stiffness scale factor (moderate DR)"
+    - name: kd_scale
+      dim: 1
+      range: [0.8, 1.2]
+      description: "PD damping scale factor (moderate DR)"
+
+# RMA Policy architecture
+policy:
+  latent_dim: 4       # Compact latent (matches privileged dim)
+  policy_hidden_dims: [256, 256, 256]  # Same depth as baseline
+  encoder_hidden_dims: [32, 16]        # Small encoder for 4-dim input
+  adaptation_hidden_dims: [256, 128]   # MLP: 2400 -> 256 -> 128 -> 4
+  history_length: 50   # 50 steps at 50Hz = 1 second of history
+  activation: elu
+
+# Training Phase 1: Train base policy with encoder in Isaac Lab
+# Uses Isaac-Velocity-Flat-Go2-Sim2Sim-RMA-v0 task
+phase1:
+  task: "Isaac-Velocity-Flat-Go2-Sim2Sim-RMA-v0"
+  max_iterations: 5000
+  learning_rate: 1.0e-3
+  save_interval: 500
+  experiment_name: go2_rma_phase1
+  network_dims: [256, 256, 256]
+  # Actor input: obs(48) + latent(4) = 52
+  # Critic input: obs(48) + privileged(4) = 52
+
+# Training Phase 2: Train adaptation module
+# Collect data with trained Phase 1 policy, then train offline
+phase2:
+  data_path: rma/data/go2_rma_phase2.npz
+  num_samples: 100000
+  epochs: 100
+  batch_size: 256
+  learning_rate: 1.0e-3
+  adaptation_hidden_dims: [256, 128]
+  experiment_name: go2_rma_phase2
+
+# MuJoCo deployment config
+deployment:
+  use_adaptation: true
+  warmup_steps: 50   # Steps to fill history buffer before using adaptation
+  policy_path: null   # Set to Phase 1 exported policy path
+  adaptation_path: null  # Set to Phase 2 trained adaptation module path
+  # MuJoCo model
+  mujoco_model: "unitree_mujoco/unitree_robots/go2/scene_flat.xml"
+  # Physics params (nominal, will be adapted)
+  pd_gains:
+    kp: 20.0
+    kd: 0.5
+  action_scale: 0.25
+  default_angles: [0.1, 0.8, -1.5, -0.1, 0.8, -1.5, 0.1, 1.0, -1.5, -0.1, 1.0, -1.5]

@@ -1,0 +1,51 @@
+# Go2 Actuator Net Configuration
+# ================================
+# Must match baseline go2_sim2sim_cfg.py settings exactly.
+
+robot_name: go2
+num_joints: 12
+
+# MuJoCo model — MUST be the same XML used for deployment
+mujoco_model: unitree_mujoco/unitree_robots/go2/scene_flat.xml
+
+# PD gains (must match baseline DCMotorCfg: Kp=20, Kd=0.5)
+pd_gains:
+  kp: 20.0
+  kd: 0.5
+
+# Default joint positions in MuJoCo order:
+#   [FL_h, FL_t, FL_c, FR_h, FR_t, FR_c, RL_h, RL_t, RL_c, RR_h, RR_t, RR_c]
+default_angles: [0.1, 0.8, -1.5, -0.1, 0.8, -1.5, 0.1, 1.0, -1.5, -0.1, 1.0, -1.5]
+
+# unitree_mujoco XML has actuator order FR,FL,RR,RL — need ctrl swap
+ctrl_swap: true
+
+# Data collection settings
+data_collection:
+  random_episodes: 200
+  steps_per_episode: 500
+  joint_sweeps: 20
+  position_range: [-0.8, 0.8]
+  sweep_range: [-1.5, 1.5]
+  simulation_dt: 0.005
+
+# Training settings
+training:
+  epochs: 200
+  batch_size: 512
+  learning_rate: 0.001
+  hidden_dims: [128, 64, 32]
+  dropout: 0.1
+
+# Output paths (relative to actuator_net/)
+paths:
+  data: data/go2/actuator_data.csv
+  model: models/go2/actuator_net_jit.pt
+  scaler: models/go2/feature_scaler.pkl
+
+# Isaac Lab integration — must match baseline DCMotorCfg
+isaac_lab:
+  effort_limit: 30.0
+  velocity_limit: 100.0
+  fallback_stiffness: 20.0
+  fallback_damping: 0.5

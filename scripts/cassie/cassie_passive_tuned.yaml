@@ -1,0 +1,63 @@
+# Cassie Passive Ankle Deployment Config - WITH FEEDFORWARD BIAS
+#
+# Tuned config with feedforward bias to counteract forward drift.
+
+# Policy path (exported TorchScript)
+policy_path: "/home/drl-68/sim2sim_project/logs/cassie/policies/passive_enhance.pt"
+
+# MuJoCo XML model path
+xml_path: "/home/drl-68/sim2sim_project/external/agility_cassie/scene.xml"
+
+# Simulation settings
+simulation_duration: 60.0
+simulation_dt: 0.001        # 1000 Hz physics
+control_decimation: 20       # 50 Hz control
+
+# PD gains per actuator type: [Kp, Kd, effort_limit]
+pd_gains:
+  hip_abduction: [100.0, 20.0, 200.0]
+  hip_rotation:  [100.0, 20.0, 200.0]
+  hip_flexion:   [200.0, 40.0, 200.0]
+  thigh_joint:   [200.0, 40.0, 200.0]
+  toe_joint:     [40.0,  15.0, 100.0]
+
+# PD Gain Scale
+pd_gain_scale: 8.0
+
+# Default joint positions (MUST match the Isaac Lab training reference)
+default_angles_isaac:
+  - 0.1       # hip_abduction_left
+  - 0.0       # hip_rotation_left
+  - 1.0       # hip_flexion_left
+  - -1.8      # thigh_joint_left
+  - 1.57      # ankle_joint_left
+  - -1.57     # toe_joint_left
+  - -0.1      # hip_abduction_right
+  - 0.0       # hip_rotation_right
+  - 1.0       # hip_flexion_right
+  - -1.8      # thigh_joint_right
+  - 1.57      # ankle_joint_right
+  - -1.57     # toe_joint_right
+
+# Action scale
+action_scale: 0.3
+
+# Network sizes
+num_actions: 10
+num_obs: 46
+
+# Initial command (standing)
+cmd_init: [0.0, 0.0, 0.0]
+
+# Initial base height
+initial_height: 1.0
+
+# ===== FEEDFORWARD BIAS CORRECTION =====
+# These offsets are added to the policy actions to counteract sim-to-sim drift.
+# Positive hip_flexion bias = lean backward (counteract forward drift)
+# Values are in radians, applied BEFORE action_scale multiplication.
+feedforward_bias:
+  enabled: false
+  # Per-joint offsets in Isaac Lab order (10 active joints for passive policy)
+  # [abd_L, rot_L, flex_L, thigh_L, toe_L, abd_R, rot_R, flex_R, thigh_R, toe_R]
+  offsets: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]

@@ -1,0 +1,51 @@
+# Git
+.git/
+.github/
+.gitignore
+.gitmodules
+
+# Documentation
+docs/
+
+# Excluded projects
+Two-wheel-Legged-Bot/
+exam2/
+_archive/
+
+# External repos
+unitree_mujoco/
+cassie-mujoco-sim/
+
+# Logs and outputs
+logs/
+**/runs/
+**/output/
+**/outputs/
+**/videos/
+
+# Experiment data
+experiments/
+
+# Large data
+rma/data/
+rma/models/
+actuator_net/data/
+actuator_net/models/
+
+# Docker
+docker/cluster/exports/
+docker/.container.cfg
+
+# Build artifacts
+**/__pycache__/
+**/*.egg-info/
+*.tmp
+*.zip
+*.npz
+
+# Isaac Sim
+_isaac_sim?
+
+# IDE
+.claude/
+.vscode/

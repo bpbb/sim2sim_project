@@ -1,0 +1,61 @@
+# Cassie RMA Configuration
+# ========================
+
+robot_name: cassie
+num_joints: 10
+
+# Observation dimensions
+observations:
+  base_obs_dim: 46  # Cassie has different obs structure
+
+# Privileged information (ground truth from simulator)
+privileged_info:
+  dim: 10
+  components:
+    - name: friction_coefficients
+      dim: 2  # Left/right foot
+      range: [0.5, 1.5]
+    - name: base_mass_offset
+      dim: 1
+      range: [-2.0, 5.0]  # kg added/removed (Cassie is heavier)
+    - name: actuator_strength
+      dim: 2  # Left/right leg
+      range: [0.8, 1.2]
+    - name: ground_friction
+      dim: 1
+      range: [0.5, 1.5]
+    - name: spring_stiffness
+      dim: 2  # Leaf springs (Cassie specific)
+      range: [0.8, 1.2]
+    - name: damping_ratio
+      dim: 2
+      range: [0.8, 1.2]
+
+# RMA Policy architecture
+policy:
+  latent_dim: 8
+  policy_hidden_dims: [256, 256, 256]
+  encoder_hidden_dims: [64, 32]
+  adaptation_hidden_dims: [256, 128]
+  history_length: 50
+  activation: elu
+
+# Training Phase 1: Train base policy with encoder
+phase1:
+  max_iterations: 8000  # Cassie needs more training
+  learning_rate: 1.0e-3
+  save_interval: 2000
+  experiment_name: cassie/rma_phase1
+
+# Training Phase 2: Train adaptation module
+phase2:
+  max_iterations: 3000
+  learning_rate: 1.0e-3
+  save_interval: 500
+  freeze_policy: true
+  experiment_name: cassie/rma_phase2
+
+# Deployment
+deployment:
+  use_adaptation: true
+  warmup_steps: 50

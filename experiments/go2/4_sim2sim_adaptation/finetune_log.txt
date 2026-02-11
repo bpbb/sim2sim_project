@@ -1,0 +1,25 @@
+
+======================================================================
+  MuJoCo Policy Fine-Tuning
+======================================================================
+
+Loading policy: logs/go2/policies/moderate.pt
+Creating 64 parallel MuJoCo environments...
+
+Fine-tuning for 640000 total steps...
+Horizon: 100, Num envs: 64, Updates: 100
+
+Update   10 | Steps   64000 | Reward:     nan
+Update   20 | Steps  128000 | Reward:     nan
+Update   30 | Steps  192000 | Reward:     nan
+Update   40 | Steps  256000 | Reward:     nan
+Update   50 | Steps  320000 | Reward:     nan
+Update   60 | Steps  384000 | Reward:     nan
+Update   70 | Steps  448000 | Reward:     nan
+Update   80 | Steps  512000 | Reward:     nan
+Update   90 | Steps  576000 | Reward:     nan
+Update  100 | Steps  640000 | Reward:     nan
+
+✓ Saved adapted policy to: experiments/go2/4_sim2sim_adaptation/moderate_adapted.pt
+
+Fine-tuning complete! Run deployment to see improvements.

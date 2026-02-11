@@ -1,0 +1,198 @@
+{
+  "label": "actuator_net",
+  "experiment": "directions",
+  "scenarios": {
+    "Forward": {
+      "config": {
+        "name": "Forward",
+        "commands": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "description": "Standard forward walking"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.47890517367458946,
+        "rmse_vy": 0.10806343024150665,
+        "rmse_wz": 0.4311157556360898,
+        "overall_rmse": 0.3772217142413404,
+        "mean_height": 0.21695260077483366,
+        "std_height": 0.052785108549288695,
+        "mean_action_smoothness": 1.9651834318091967,
+        "mean_torque_magnitude": 24.90421241016128
+      }
+    },
+    "Backward": {
+      "config": {
+        "name": "Backward",
+        "commands": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "description": "Reverse walking"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.4112481636045123,
+        "rmse_vy": 0.026640498128318528,
+        "rmse_wz": 0.039867152307242436,
+        "overall_rmse": 0.2390426447600912,
+        "mean_height": 0.36743012567154065,
+        "std_height": 0.00890578469135822,
+        "mean_action_smoothness": 0.7869129776519218,
+        "mean_torque_magnitude": 13.818492872759304
+      }
+    },
+    "Left": {
+      "config": {
+        "name": "Left",
+        "commands": [
+          0.0,
+          0.5,
+          0.0
+        ],
+        "description": "Lateral left"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.028694385721269373,
+        "rmse_vy": 0.36518740517024745,
+        "rmse_wz": 0.07744177403130499,
+        "overall_rmse": 0.2161653973481226,
+        "mean_height": 0.3536040988516365,
+        "std_height": 0.010438055366240978,
+        "mean_action_smoothness": 0.876036778516189,
+        "mean_torque_magnitude": 13.89863551505087
+      }
+    },
+    "Right": {
+      "config": {
+        "name": "Right",
+        "commands": [
+          0.0,
+          -0.5,
+          0.0
+        ],
+        "description": "Lateral right"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.029361328998707633,
+        "rmse_vy": 0.41333770216407456,
+        "rmse_wz": 0.08411609893745899,
+        "overall_rmse": 0.24412132350623256,
+        "mean_height": 0.34481617777857143,
+        "std_height": 0.006683885218552261,
+        "mean_action_smoothness": 0.9486371430889579,
+        "mean_torque_magnitude": 14.957142956829365
+      }
+    },
+    "Turn_Left": {
+      "config": {
+        "name": "Turn_Left",
+        "commands": [
+          0.0,
+          0.0,
+          0.5
+        ],
+        "description": "Rotate left"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.0036153453933692016,
+        "rmse_vy": 0.002408390499989497,
+        "rmse_wz": 0.49849891971861027,
+        "overall_rmse": 0.28781941330617666,
+        "mean_height": 0.35940171934789705,
+        "std_height": 0.004622236746988605,
+        "mean_action_smoothness": 0.013803311793803463,
+        "mean_torque_magnitude": 12.934208643330118
+      }
+    },
+    "Turn_Right": {
+      "config": {
+        "name": "Turn_Right",
+        "commands": [
+          0.0,
+          0.0,
+          -0.5
+        ],
+        "description": "Rotate right"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.00662639004066582,
+        "rmse_vy": 0.015586615149855399,
+        "rmse_wz": 0.4835733503578004,
+        "overall_rmse": 0.27936239116547096,
+        "mean_height": 0.3720361668739511,
+        "std_height": 0.007533904270207542,
+        "mean_action_smoothness": 0.05512014130856623,
+        "mean_torque_magnitude": 9.67243770021995
+      }
+    },
+    "Diagonal": {
+      "config": {
+        "name": "Diagonal",
+        "commands": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "description": "Diagonal forward-left"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.46608234809806,
+        "rmse_vy": 0.47772414751147224,
+        "rmse_wz": 0.3225591714161197,
+        "overall_rmse": 0.42797879051374255,
+        "mean_height": 0.2159042705783422,
+        "std_height": 0.0445406024505044,
+        "mean_action_smoothness": 1.8508052197625464,
+        "mean_torque_magnitude": 22.953726135578897
+      }
+    },
+    "Circle": {
+      "config": {
+        "name": "Circle",
+        "commands": [
+          0.5,
+          0.0,
+          0.3
+        ],
+        "description": "Forward with turning"
+      },
+      "metrics": {
+        "success_rate": 100.0,
+        "mean_survival_steps": 500.0,
+        "std_survival_steps": 0.0,
+        "rmse_vx": 0.48047904841592853,
+        "rmse_vy": 0.0757350475118534,
+        "rmse_wz": 0.4272558430520157,
+        "overall_rmse": 0.3737840146441024,
+        "mean_height": 0.221378000006797,
+        "std_height": 0.05132859979717503,
+        "mean_action_smoothness": 1.762423893487573,
+        "mean_torque_magnitude": 24.139400482532388
+      }
+    }
+  }
+}

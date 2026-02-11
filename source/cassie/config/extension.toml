@@ -1,0 +1,19 @@
+[package]
+
+version = "0.1.0"
+
+category = "isaaclab"
+title = "Cassie Sim2Sim"
+author = "Isaac Lab Project Developers"
+maintainer = "Isaac Lab Project Developers"
+description = "Cassie bipedal robot sim-to-sim transfer environments"
+repository = "https://github.com/isaac-sim/IsaacLabExtensionTemplate.git"
+keywords = ["cassie", "sim2sim", "isaaclab", "bipedal"]
+
+[dependencies]
+"isaaclab" = {}
+"isaaclab_assets" = {}
+"isaaclab_rl" = {}
+
+[[python.module]]
+name = "cassie"

@@ -1,0 +1,55 @@
+# Cassie Balance Standing Deployment Config
+#
+# Simplified task: stand still only (no locomotion)
+# Should achieve >10s standing in MuJoCo
+
+# Policy path (will be trained)
+policy_path: "/home/drl-68/sim2sim_project/logs/cassie/policies/standing.pt"
+
+# MuJoCo XML model path
+xml_path: "/home/drl-68/sim2sim_project/external/agility_cassie/scene.xml"
+
+# Simulation settings
+simulation_duration: 60.0
+simulation_dt: 0.001        # 1000 Hz physics (for 4-bar stability)
+control_decimation: 20       # 50 Hz control
+
+# PD gains per actuator type: [Kp, Kd, effort_limit]
+# Slightly lower than locomotion since actions are smaller for standing
+pd_gains:
+  hip_abduction: [80.0, 18.0, 200.0]
+  hip_rotation:  [80.0, 18.0, 200.0]
+  hip_flexion:   [160.0, 35.0, 200.0]
+  thigh_joint:   [160.0, 35.0, 200.0]
+  toe_joint:     [35.0,  12.0, 100.0]
+
+# PD Gain Scale (may need less than locomotion)
+pd_gain_scale: 7.0
+
+# Default joint positions (MuJoCo home keyframe)
+default_angles_isaac:
+  - 0.1       # hip_abduction_left
+  - 0.0       # hip_rotation_left
+  - 1.0       # hip_flexion_left
+  - -1.8      # thigh_joint_left
+  - 1.57      # ankle_joint_left
+  - -1.57     # toe_joint_left
+  - -0.1      # hip_abduction_right
+  - 0.0       # hip_rotation_right
+  - 1.0       # hip_flexion_right
+  - -1.8      # thigh_joint_right
+  - 1.57      # ankle_joint_right
+  - -1.57     # toe_joint_right
+
+# Action scale (conservative for standing)
+action_scale: 0.25
+
+# Network sizes
+num_actions: 10
+num_obs: 46
+
+# Initial command (standing - always zero)
+cmd_init: [0.0, 0.0, 0.0]
+
+# Initial base height
+initial_height: 1.0

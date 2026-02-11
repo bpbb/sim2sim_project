@@ -1,0 +1,63 @@
+# Cassie Passive Ankle Deployment Config
+#
+# Final validated config for Passive Ankle Sim2Sim transfer.
+
+# Policy path (exported TorchScript)
+policy_path: "/home/drl-68/sim2sim_project/logs/cassie/policies/passive_enhance2.pt"
+
+# MuJoCo XML model path
+xml_path: "/home/drl-68/sim2sim_project/external/agility_cassie/scene.xml"
+
+# Simulation settings
+simulation_duration: 60.0
+simulation_dt: 0.001        # 1000 Hz physics
+control_decimation: 20       # 50 Hz control
+
+# PD gains per actuator type: [Kp, Kd, effort_limit]
+pd_gains:
+  hip_abduction: [500.0, 30.0, 200.0]
+  hip_rotation:  [500.0, 30.0, 200.0]
+  hip_flexion:   [500.0, 30.0, 200.0]
+  thigh_joint:   [800.0, 50.0, 200.0]
+  toe_joint:     [200.0, 20.0, 100.0]
+
+# PD Gain Scale
+pd_gain_scale: 15.0
+
+# Default joint positions (MUST match the Isaac Lab training reference)
+default_angles_isaac:
+  - 0.1       # hip_abduction_left
+  - -0.1      # hip_abduction_right
+  - 0.0       # hip_rotation_left
+  - 0.0       # hip_rotation_right
+  - 1.0       # hip_flexion_left
+  - 1.0       # hip_flexion_right
+  - -1.8      # thigh_joint_left
+  - -1.8      # thigh_joint_right
+  - 1.57      # ankle_joint_left
+  - 1.57      # ankle_joint_right
+  - -1.57     # toe_joint_left
+  - -1.57     # toe_joint_right
+
+# Action scale
+action_scale: 0.4
+
+# Network sizes
+num_actions: 10
+num_obs: 46
+
+# Initial command (standing)
+cmd_init: [0.0, 0.0, 0.0]
+
+# Initial base height
+initial_height: 1.0
+
+# ===== FEEDFORWARD BIAS CORRECTION =====
+# These offsets are added to the policy actions to counteract sim-to-sim drift.
+# Negative hip_flexion bias = lean backward (counteract forward drift)
+# Interleaved order: [abdL, abdR, rotL, rotR, flexL, flexR, thighL, thighR, toeL, toeR]
+feedforward_bias:
+  enabled: true
+  # [abdL, abdR, rotL, rotR, flexL, flexR, thighL, thighR, toeL, toeR]
+  # Indices 4, 5 are hip flexion (-0.3 lean back).
+  offsets: [0.0, 0.0, 0.0, 0.0, -0.3, -0.3, 0.0, 0.0, 0.0, 0.0]

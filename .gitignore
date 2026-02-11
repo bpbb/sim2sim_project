@@ -1,0 +1,75 @@
+# ============================================================
+# Sim2Sim Transfer Project
+# ============================================================
+
+# === Python ===
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+**/*.egg-info/
+*.egg
+.pytest_cache/
+**/.pytest_cache/
+
+# === IDE ===
+.DS_Store
+**/.idea/
+**/.vscode/
+!.vscode
+.claude/
+
+# === Omniverse / Isaac Sim ===
+**/*.dmp
+**/.thumbs
+_isaac_sim*
+_repo
+_build
+.lastformat
+
+# === Training outputs ===
+logs/
+**/runs/
+**/recordings/
+**/output/
+**/outputs/
+**/videos/
+**/wandb/
+**/.neptune/
+
+# === Docker ===
+docker/artifacts/
+
+# === Large data & model files ===
+*.tmp
+*.npz
+*.zip
+*.pt
+*.pth
+*.onnx
+*.jit
+*.pkl
+
+# === Experiment generated data ===
+experiments/go2/results*/
+experiments/go2/rma/
+experiments/go2/*.zip
+rma/data/
+rma/models/
+rma/checkpoints/
+actuator_net/data/
+actuator_net/models/
+scripts/go2/comparison_results/
+
+# === External repos (clone separately) ===
+unitree_mujoco/
+cassie-mujoco-sim/
+
+# === Excluded projects ===
+Two-wheel-Legged-Bot/
+exam2/
+_archive/
+
+# === Misc ===
+MUJOCO_LOG.TXT

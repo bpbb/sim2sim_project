@@ -1,0 +1,18 @@
+[package]
+version = "0.1.0"
+category = "isaaclab"
+title = "Go2 Sim2Sim"
+author = "Boonyaporn Preechasuth"
+maintainer = "Boonyaporn Preechasuth"
+description = "Go2 sim2sim transfer extension for Isaac Lab"
+repository = ""
+keywords = ["go2", "sim2sim", "isaaclab"]
+
+[dependencies]
+"isaaclab" = {}
+"isaaclab_assets" = {}
+"isaaclab_rl" = {}
+"isaaclab_tasks" = {}
+
+[[python.module]]
+name = "go2"

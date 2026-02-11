@@ -1,0 +1,40 @@
+# Go2 Isaac Lab to MuJoCo deployment config - ROUGH TERRAIN
+
+# Policy path (exported TorchScript)
+policy_path: "/home/drl-68/sim2sim_project/logs/go2/policies/rough_moderate.pt"
+
+# MuJoCo XML model path - ROUGH TERRAIN
+xml_path: "/home/drl-68/sim2sim_project/unitree_mujoco/unitree_robots/go2/scene_terrain.xml"
+
+# Simulation settings
+simulation_duration: 60.0
+simulation_dt: 0.005
+control_decimation: 4
+
+# PD gains
+kps: [20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]
+kds: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+
+# Default joint angles (MuJoCo order: FL, FR, RL, RR - hip, thigh, calf for each)
+default_angles: [0.1, 0.8, -1.5, -0.1, 0.8, -1.5, 0.1, 1.0, -1.5, -0.1, 1.0, -1.5]
+
+# Observation scales
+lin_vel_scale: 2.0
+ang_vel_scale: 0.25
+dof_pos_scale: 1.0
+dof_vel_scale: 0.05
+action_scale: 0.25
+
+# Command scale
+cmd_scale: [2.0, 2.0, 0.25]
+
+# Network sizes
+num_actions: 12
+num_obs: 48
+
+# Initial command (vx, vy, yaw_rate)
+cmd_init: [0.5, 0.0, 0.0]
+
+# Initial base position and orientation (MuJoCo world frame)
+base_init_pos: [-1.5, 0.0, 0.45]  # x, y, z
+base_init_quat: [1.0, 0.0, 0.0, 0.0]  # w, x, y, z

@@ -51,6 +51,9 @@ docker/artifacts/
 !Two-wheel-Legged-Bot/main/logs/**/model_4999.pt
 !Two-wheel-Legged-Bot/main/lab/**/flamingo_rev03_1_1.zip
 
+!logs/cassie/policies/*.pt
+!logs/go2/policies/*.pt
+
 # === Experiment generated data ===
 experiments/go2/results*/
 experiments/go2/rma/

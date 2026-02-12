@@ -41,11 +41,7 @@ docker/artifacts/
 *.tmp
 *.npz
 *.zip
-*.pt
 *.pth
-*.onnx
-*.jit
-*.pkl
 
 # Exceptions for essential Flamingo assets
 !Two-wheel-Legged-Bot/main/logs/**/model_4999.pt

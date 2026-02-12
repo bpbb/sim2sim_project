@@ -55,19 +55,13 @@ docker/artifacts/
 experiments/go2/results*/
 experiments/go2/rma/
 experiments/go2/*.zip
-rma/data/
-rma/models/
+rma/models/cassie
 rma/checkpoints/
 actuator_net/data/
-actuator_net/models/
+actuator_net/models/cassie
 scripts/go2/comparison_results/
 
-# === External repos (clone separately) ===
-unitree_mujoco/
-cassie-mujoco-sim/
-
 # === Excluded projects ===
-# Two-wheel-Legged-Bot  # Now included (cleaned version)
 exam2/
 _archive/
 

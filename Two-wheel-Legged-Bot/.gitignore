@@ -29,8 +29,6 @@ outputs/
 # Model checkpoints (keep only final models)
 !*.pt
 !*.pth
-!model_4999.pt
-!final/*.pt
 
 # Large data files
 *.zip

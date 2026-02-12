@@ -21,15 +21,14 @@ wheels/
 *.egg
 
 # Training logs and checkpoints
-logs/
 wandb/
 runs/
 outputs/
 *.log
 
 # Model checkpoints (keep only final models)
-*.pt
-*.pth
+!*.pt
+!*.pth
 !model_4999.pt
 !final/*.pt
 

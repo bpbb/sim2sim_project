@@ -133,6 +133,10 @@ pip install -e source/cassie
 
 The pipeline has three stages: **Train** (Isaac Lab) -> **Export** (TorchScript) -> **Deploy** (MuJoCo).
 
+```bash
+cd ~/sim2sim_project
+```
+
 ### 1. Training (Isaac Lab)
 
 ```bash
@@ -151,18 +155,16 @@ python scripts/rsl_rl/train.py \
     --task Isaac-Velocity-Flat-Cassie-Sim2Sim-Passive-v0 \
     --num_envs 4096 --max_iterations 30000
 
-# Cassie - Balance standing task
-python scripts/rsl_rl/train.py \
-    --task Isaac-Balance-Standing-Cassie-v0 \
-    --num_envs 4096 --max_iterations 20000
-
 # Flamingo - Flat terrain with stand and drive (CO-RL, 3-frame stacking)
-python Two-wheel-Legged-Bot/main/scripts/train.py \
+python Two-wheel-Legged-Bot/main/scripts/co_rl/train.py \
     --task Flamingo_Flat_Stand_Drive \
-    --num_envs 4096 --max_iterations 5000
+    --num_envs 4096 --max_iterations 5000 \
+    --num_policy_stacks 2 --num_critic_stacks 2
 ```
 
 Checkpoints are saved to `logs/<robot>/rsl_rl/<task>/<timestamp>/`.
+
+If you want to play the environment, you can use the play.py script instead of train.py in the same directory.
 
 ### 2. Export Policy
 
@@ -195,7 +197,8 @@ python scripts/cassie/deploy_mujoco.py scripts/cassie/cassie_passive.yaml
 
 # Flamingo - Hybrid position-velocity control (requires fixing 8 bugs + geometry match)
 python Two-wheel-Legged-Bot/main/scripts/transfer_flamingo_sim2sim.py \
-    --policy logs/co_rl/Flamingo_Flat_Stand_Drive/ppo/*/model_4999.pt \
+    --policy Two-wheel-Legged-Bot/main/logs/co_rl/Flamingo_Flat_Stand_Drive/ppo/model/model_4999.pt \
+    --xml Two-wheel-Legged-Bot/sim2sim_onnx/assets/flamingo_torque.xml \
     --pd_scale 1
 ```
 
@@ -240,7 +243,6 @@ Deployment YAML configs specify: policy path, MuJoCo scene, PD gains, joint mapp
 - Gear ratio -1.5 for leg joints affects both observations and PD control
 - Actuator delays: 0-4 step random delays in training
 
-All environments have a corresponding `-Play-v0` variant for inference with fewer parallel environments.
 
 ## Robot Comparison
 

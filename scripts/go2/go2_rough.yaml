@@ -1,10 +1,10 @@
 # Go2 Isaac Lab to MuJoCo deployment config - ROUGH TERRAIN
 
 # Policy path (exported TorchScript)
-policy_path: "/home/drl-68/sim2sim_project/logs/go2/policies/rough_moderate.pt"
+policy_path: "logs/go2/policies/rough_moderate.pt"
 
 # MuJoCo XML model path - ROUGH TERRAIN
-xml_path: "/home/drl-68/sim2sim_project/unitree_mujoco/unitree_robots/go2/scene.xml"
+xml_path: "unitree_mujoco/unitree_robots/go2/scene.xml"
 
 # Simulation settings
 simulation_duration: 60.0

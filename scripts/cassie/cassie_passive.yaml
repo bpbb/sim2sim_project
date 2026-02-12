@@ -3,10 +3,10 @@
 # Final validated config for Passive Ankle Sim2Sim transfer.
 
 # Policy path (exported TorchScript)
-policy_path: "/home/drl-68/sim2sim_project/logs/cassie/policies/passive_enhance2.pt"
+policy_path: "logs/cassie/policies/passive_enhance2.pt"
 
 # MuJoCo XML model path
-xml_path: "/home/drl-68/sim2sim_project/external/agility_cassie/scene.xml"
+xml_path: "external/agility_cassie/scene.xml"
 
 # Simulation settings
 simulation_duration: 60.0

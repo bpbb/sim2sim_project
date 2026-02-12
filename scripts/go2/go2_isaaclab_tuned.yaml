@@ -2,10 +2,10 @@
 # Based on go2_isaaclab.yaml with increased PD gains to match Isaac Lab's constraint-based PD
 
 # Policy path (exported TorchScript)
-policy_path: "/home/drl-68/sim2sim_project/logs/go2/policies/rough_moderate.pt"
+policy_path: "logs/go2/policies/rough_moderate.pt"
 
 # MuJoCo XML model path
-xml_path: "/home/drl-68/sim2sim_project/unitree_mujoco/unitree_robots/go2/scene_isaaclab_terrain.xml"
+xml_path: "unitree_mujoco/unitree_robots/go2/scene_isaaclab_terrain.xml"
 
 # Simulation settings
 simulation_duration: 60.0

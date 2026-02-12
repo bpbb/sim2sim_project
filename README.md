@@ -55,15 +55,78 @@ sim2sim_project/
 
 ## Installation
 
+### Step 1: Clone and Install Packages
+
 ```bash
 # Clone the repository
-git clone <repo-url> sim2sim_project
+git clone https://github.com/bpbb/sim2sim_project.git
 cd sim2sim_project
 
-# Install Isaac Lab environment packages (inside Isaac Lab conda/venv)
+# Activate your Isaac Lab conda environment
+conda activate env_isaaclab
+
+# Check if packages are already installed
+pip list | grep -E "(cassie|go2|lab.flamingo)"
+
+# Install Isaac Lab environment packages
+# IMPORTANT: Do NOT use --user flag as it can cause PyTorch version conflicts!
+# Note: If packages are already installed, you can skip this step
 pip install -e source/cassie
 pip install -e source/go2 --no-deps
-pip install -e source/flamingo --no-deps  # Flamingo environment (CO-RL)
+pip install -e Two-wheel-Legged-Bot/isaac_lab_envs --no-deps  # Flamingo environment (CO-RL)
+```
+
+### Step 2: Verify Setup
+
+```bash
+# Run comprehensive setup verification
+bash scripts/verify_setup.sh
+```
+
+This script checks:
+- ✓ Python version (3.10+)
+- ✓ Conda environment activation
+- ✓ PyTorch and torchvision versions
+- ✓ **No mixed installations** (critical for avoiding "operator torchvision::nms does not exist")
+- ✓ CUDA availability
+- ✓ Required packages (cassie, go2, lab.flamingo)
+- ✓ Isaac Lab installation
+- ✓ MuJoCo installation
+
+### Troubleshooting
+
+#### Error: "operator torchvision::nms does not exist"
+
+This happens when PyTorch and torchvision are installed in different locations (conda env vs user site-packages).
+
+**Fix:**
+```bash
+# Run the automatic fix script
+bash scripts/fix_pytorch_conflict.sh
+
+# Or manually fix:
+conda activate env_isaaclab
+pip uninstall torch torchvision torchaudio
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Verify the fix
+bash scripts/verify_setup.sh
+```
+
+#### Permission Errors During Installation
+
+If you get "Permission denied" errors, make sure:
+1. You're in the conda environment (`conda activate env_isaaclab`)
+2. You're **NOT** using `--user` flag
+3. You're not trying to install to system directories
+
+```bash
+# Wrong (causes conflicts):
+pip install --user -e source/cassie
+
+# Correct:
+conda activate env_isaaclab
+pip install -e source/cassie
 ```
 
 ## Quick Start
@@ -251,10 +314,11 @@ During development, several critical sim-to-sim transfer issues were identified 
 
 ## Documentation
 
-Detailed technical documentation is in [`docs/`](docs/):
+Detailed technical documentation:
 
 | Document | Description |
 |---|---|
+| [Setup Scripts Guide](SETUP_SCRIPTS.md) | **Setup verification and troubleshooting scripts** |
 | [Technical Details](docs/SIM2SIM_TECHNICAL_DETAILS.md) | Full implementation details and transfer methodology |
 | [Experiment Analysis](docs/SIM2SIM_EXPERIMENT_ANALYSIS.md) | Results interpretation and comparison |
 | [Workspace Structure](docs/WORKSPACE_STRUCTURE.md) | Detailed file locations and training commands |

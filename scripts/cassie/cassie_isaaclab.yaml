@@ -5,10 +5,10 @@
 #   python scripts/cassie/deploy_mujoco.py scripts/cassie/cassie_isaaclab.yaml --policy /path/to/other/policy.pt
 
 # Policy path (exported TorchScript)
-policy_path: "/home/drl-68/sim2sim_project/logs/cassie/policies/moderate.pt"
+policy_path: "logs/cassie/policies/moderate.pt"
 
 # MuJoCo XML model path (scene.xml includes floor — required!)
-xml_path: "/home/drl-68/sim2sim_project/external/agility_cassie/scene.xml"
+xml_path: "external/agility_cassie/scene.xml"
 
 # Simulation settings
 simulation_duration: 60.0

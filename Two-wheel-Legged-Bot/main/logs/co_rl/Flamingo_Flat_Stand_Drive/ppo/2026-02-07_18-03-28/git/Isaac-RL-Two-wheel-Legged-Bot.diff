@@ -1,0 +1,45 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   scripts/co_rl/play.py
+	modified:   scripts/co_rl/train.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	lab/flamingo/assets/data/Robots/Flamingo/flamingo_rev03_1_1/config.yaml
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/scripts/co_rl/play.py b/scripts/co_rl/play.py
+index 79b0a8c..bb9f2eb 100644
+--- a/scripts/co_rl/play.py
++++ b/scripts/co_rl/play.py
+@@ -11,6 +11,9 @@ from isaaclab.app import AppLauncher
+ import matplotlib.pyplot as plt
+ 
+ # local imports
++import os
++import sys
++sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+ import cli_args  # isort: skip
+ from scripts.co_rl.core.runners import OffPolicyRunner
+ 
+diff --git a/scripts/co_rl/train.py b/scripts/co_rl/train.py
+index 9eb582f..d1ab783 100644
+--- a/scripts/co_rl/train.py
++++ b/scripts/co_rl/train.py
+@@ -11,6 +11,8 @@ import sys
+ from isaaclab.app import AppLauncher
+ 
+ # local imports
++import os
++sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+ import cli_args  # isort: skip
+ from scripts.co_rl.core.runners import OffPolicyRunner
+ 

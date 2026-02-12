@@ -25,7 +25,7 @@ _build
 .lastformat
 
 # === Training outputs ===
-logs/
+logs1/
 **/runs/
 **/recordings/
 **/output/
@@ -47,6 +47,10 @@ docker/artifacts/
 *.jit
 *.pkl
 
+# Exceptions for essential Flamingo assets
+!Two-wheel-Legged-Bot/main/logs/**/model_4999.pt
+!Two-wheel-Legged-Bot/main/lab/**/flamingo_rev03_1_1.zip
+
 # === Experiment generated data ===
 experiments/go2/results*/
 experiments/go2/rma/
@@ -63,9 +67,16 @@ unitree_mujoco/
 cassie-mujoco-sim/
 
 # === Excluded projects ===
-Two-wheel-Legged-Bot/
+# Two-wheel-Legged-Bot  # Now included (cleaned version)
 exam2/
 _archive/
+
+# Two-wheel-Legged-Bot specific exclusions
+Two-wheel-Legged-Bot/**/.git/
+Two-wheel-Legged-Bot/**/logs/*
+!Two-wheel-Legged-Bot/main/logs/co_rl/Flamingo_Flat_Stand_Drive/ppo/model/model_4999.pt
+Two-wheel-Legged-Bot/**/__pycache__/
+Two-wheel-Legged-Bot/**/*.pyc
 
 # === Misc ===
 MUJOCO_LOG.TXT

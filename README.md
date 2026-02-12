@@ -60,11 +60,6 @@ sim2sim_project/
 git clone <repo-url> sim2sim_project
 cd sim2sim_project
 
-# Clone external MuJoCo models
-git clone https://github.com/unitreerobotics/unitree_mujoco.git unitree_mujoco
-git clone https://github.com/osudrl/cassie-mujoco-sim.git cassie-mujoco-sim
-git clone https://github.com/jaykorea/Isaac-RL-Two-wheel-Legged-Bot.git Two-wheel-Legged-Bot
-
 # Install Isaac Lab environment packages (inside Isaac Lab conda/venv)
 pip install -e source/cassie
 pip install -e source/go2 --no-deps

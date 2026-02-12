@@ -1,0 +1,117 @@
+================================================================================
+FLAMINGO USD GEOMETRY EXTRACTION
+================================================================================
+
+USD file: /home/drl-68/sim2sim_project/Two-wheel-Legged-Bot/main/lab/flamingo/assets/data/Robots/Flamingo/flamingo_rev03_1_1/flamingo_rev03_1_1_merge_joints.usd
+
+✅ USD stage loaded successfully
+
+================================================================================
+LINKS INFORMATION
+================================================================================
+
+base_link:
+  Local position:  (  0.0000,   0.0000,   0.0000)
+  World position:  (  0.0000,   0.0000,   0.0000)
+  Mass:            5.6060 kg
+  Inertia:         (0.01183009, 0.00524292, 0.00930004)
+
+left_hip_link:
+  Local position:  ( -0.0005,   0.0765,  -0.0300)
+  World position:  ( -0.0005,   0.0765,  -0.0300)
+  Mass:            1.2882 kg
+  Inertia:         (0.00148137, 0.00086820, 0.00106805)
+
+left_leg_link:
+  Local position:  ( -0.2649,   0.1589,  -0.2348)
+  World position:  ( -0.2649,   0.1589,  -0.2348)
+  Mass:            0.3743 kg
+  Inertia:         (0.00444030, 0.00015272, 0.00456193)
+
+left_shoulder_link:
+  Local position:  ( -0.0740,   0.0699,  -0.0300)
+  World position:  ( -0.0740,   0.0699,  -0.0300)
+  Mass:            2.0906 kg
+  Inertia:         (0.00151673, 0.00666786, 0.00799847)
+
+left_wheel_link:
+  Local position:  ( -0.0867,   0.1624,  -0.4537)
+  World position:  ( -0.0867,   0.1624,  -0.4537)
+  Mass:            0.9832 kg
+  Inertia:         (0.00285936, 0.00285936, 0.00560646)
+
+right_hip_link:
+  Local position:  ( -0.0005,  -0.0765,  -0.0300)
+  World position:  ( -0.0005,  -0.0765,  -0.0300)
+  Mass:            1.2882 kg
+  Inertia:         (0.00148137, 0.00086820, 0.00106805)
+
+right_leg_link:
+  Local position:  ( -0.2649,  -0.1589,  -0.2348)
+  World position:  ( -0.2649,  -0.1589,  -0.2348)
+  Mass:            0.3743 kg
+  Inertia:         (0.00444030, 0.00015273, 0.00456195)
+
+right_shoulder_link:
+  Local position:  ( -0.0740,  -0.0699,  -0.0300)
+  World position:  ( -0.0740,  -0.0699,  -0.0300)
+  Mass:            1.2818 kg
+  Inertia:         (0.00092996, 0.00608397, 0.00693441)
+
+right_wheel_link:
+  Local position:  ( -0.0867,  -0.1624,  -0.4537)
+  World position:  ( -0.0867,  -0.1624,  -0.4537)
+  Mass:            0.9832 kg
+  Inertia:         (0.00285936, 0.00285936, 0.00560646)
+
+================================================================================
+JOINTS INFORMATION
+================================================================================
+
+left_hip_joint:
+  Body 0: /RobotAssembly_v3_3/base_link
+  Body 1: /RobotAssembly_v3_3/left_hip_link
+  Axis: Z
+
+left_leg_joint:
+  Body 0: /RobotAssembly_v3_3/left_shoulder_link
+  Body 1: /RobotAssembly_v3_3/left_leg_link
+  Axis: Z
+
+left_shoulder_joint:
+  Body 0: /RobotAssembly_v3_3/left_hip_link
+  Body 1: /RobotAssembly_v3_3/left_shoulder_link
+  Axis: Z
+
+left_wheel_joint:
+  Body 0: /RobotAssembly_v3_3/left_leg_link
+  Body 1: /RobotAssembly_v3_3/left_wheel_link
+  Axis: Z
+
+right_hip_joint:
+  Body 0: /RobotAssembly_v3_3/base_link
+  Body 1: /RobotAssembly_v3_3/right_hip_link
+  Axis: Z
+
+right_leg_joint:
+  Body 0: /RobotAssembly_v3_3/right_shoulder_link
+  Body 1: /RobotAssembly_v3_3/right_leg_link
+  Axis: Z
+
+right_shoulder_joint:
+  Body 0: /RobotAssembly_v3_3/right_hip_link
+  Body 1: /RobotAssembly_v3_3/right_shoulder_link
+  Axis: Z
+
+right_wheel_joint:
+  Body 0: /RobotAssembly_v3_3/right_leg_link
+  Body 1: /RobotAssembly_v3_3/right_wheel_link
+  Axis: Z
+
+================================================================================
+STANDING HEIGHT CALCULATION
+================================================================================
+
+Base link z-position: 0.0000m
+
+⚠️  Could not determine wheel radius

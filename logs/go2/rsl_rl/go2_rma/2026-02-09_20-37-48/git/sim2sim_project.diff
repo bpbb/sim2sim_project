@@ -1,0 +1,1339 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	deleted:    README.md
+	modified:   docker/Dockerfile
+	modified:   pyproject.toml
+	modified:   scripts/list_envs.py
+	modified:   scripts/rsl_rl/play.py
+	modified:   scripts/rsl_rl/train.py
+	deleted:    source/ext_template/config/extension.toml
+	deleted:    source/ext_template/docs/CHANGELOG.rst
+	deleted:    source/ext_template/ext_template/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/config/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/agents/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/agents/rsl_rl_ppo_cfg.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/flat_env_cfg.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/rough_env_cfg.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/mdp/__init__.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/mdp/curriculums.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/mdp/rewards.py
+	deleted:    source/ext_template/ext_template/tasks/locomotion/velocity/velocity_env_cfg.py
+	deleted:    source/ext_template/ext_template/ui_extension_example.py
+	deleted:    source/ext_template/pyproject.toml
+	deleted:    source/ext_template/setup.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	CASSIE_TRANSFER_FINDINGS.md
+	MUJOCO_LOG.TXT
+	Two-wheel-Legged-Bot/
+	_archive/
+	actuator_net/
+	cassie-mujoco-sim/
+	docs/
+	exam2/
+	experiments/
+	external/
+	rma/
+	scripts/cassie/
+	scripts/go2/
+	scripts/rsl_rl/play_arrows.py
+	source/cassie/
+	source/go2/
+	unitree_mujoco/
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/README.md b/README.md
+deleted file mode 100644
+index cd26c44..0000000
+--- a/README.md
++++ /dev/null
+@@ -1,210 +0,0 @@
+-# 🚨 Deprecation Notice
+-
+-This repository is no longer maintained.
+-
+-Since keeping this repo up-to-date with the continuous updates in Isaac Lab became difficult, we have migrated the project template generator directly into the [Isaac Lab](https://github.com/isaac-sim/IsaacLab) repository.
+-
+-👉 Please follow the steps in the Isaac Lab docs to set up your own project: [How to create your own Isaac Lab project](https://isaac-sim.github.io/IsaacLab/main/source/overview/own-project/index.html)
+-
+-If you would like to contribute to the extension template, please follow the [contribution guidelines](https://isaac-sim.github.io/IsaacLab/main/source/refs/contributing.html) in the Isaac Lab repository directly.
+- 
+----
+-
+-# Template for Isaac Lab Projects
+-
+-[![IsaacSim](https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg)](https://docs.omniverse.nvidia.com/isaacsim/latest/overview.html)
+-[![Isaac Lab](https://img.shields.io/badge/IsaacLab-2.1.0-silver)](https://isaac-sim.github.io/IsaacLab)
+-[![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://docs.python.org/3/whatsnew/3.10.html)
+-[![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
+-[![Windows platform](https://img.shields.io/badge/platform-windows--64-orange.svg)](https://www.microsoft.com/en-us/)
+-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
+-[![License](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/license/mit)
+-
+-## Overview
+-
+-This repository serves as a template for building projects or extensions based on Isaac Lab. It allows you to develop in an isolated environment, outside of the core Isaac Lab repository.
+-
+-**Key Features:**
+-
+-- `Isolation` Work outside the core Isaac Lab repository, ensuring that your development efforts remain self-contained.
+-- `Flexibility` This template is set up to allow your code to be run as an extension in Omniverse.
+-
+-**Keywords:** extension, template, isaaclab
+-
+-## Installation
+-
+-- Install Isaac Lab by following the [installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html). We recommend using the conda installation as it simplifies calling Python scripts from the terminal.
+-
+-- Clone this repository separately from the Isaac Lab installation (i.e. outside the `IsaacLab` directory):
+-
+-```bash
+-# Option 1: HTTPS
+-git clone https://github.com/isaac-sim/IsaacLabExtensionTemplate.git
+-
+-# Option 2: SSH
+-git clone git@github.com:isaac-sim/IsaacLabExtensionTemplate.git
+-```
+-
+-- Throughout the repository, the name `ext_template` only serves as an example and we provide a script to rename all the references to it automatically:
+-
+-```bash
+-# Enter the repository
+-cd IsaacLabExtensionTemplate
+-# Rename all occurrences of ext_template (in files/directories) to your_fancy_extension_name
+-python scripts/rename_template.py your_fancy_extension_name
+-```
+-
+-- Using a python interpreter that has Isaac Lab installed, install the library
+-
+-```bash
+-python -m pip install -e source/ext_template
+-```
+-
+-- Verify that the extension is correctly installed by running the following command:
+-
+-```bash
+-python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Rough-Anymal-D-v0
+-```
+-
+-### Set up IDE (Optional)
+-
+-To setup the IDE, please follow these instructions:
+-
+-- Run VSCode Tasks, by pressing `Ctrl+Shift+P`, selecting `Tasks: Run Task` and running the `setup_python_env` in the drop down menu. When running this task, you will be prompted to add the absolute path to your Isaac Sim installation.
+-
+-If everything executes correctly, it should create a file .python.env in the `.vscode` directory. The file contains the python paths to all the extensions provided by Isaac Sim and Omniverse. This helps in indexing all the python modules for intelligent suggestions while writing code.
+-
+-### Setup as Omniverse Extension (Optional)
+-
+-We provide an example UI extension that will load upon enabling your extension defined in `source/ext_template/ext_template/ui_extension_example.py`.
+-
+-To enable your extension, follow these steps:
+-
+-1. **Add the search path of your repository** to the extension manager:
+-    - Navigate to the extension manager using `Window` -> `Extensions`.
+-    - Click on the **Hamburger Icon** (☰), then go to `Settings`.
+-    - In the `Extension Search Paths`, enter the absolute path to `IsaacLabExtensionTemplate/source`
+-    - If not already present, in the `Extension Search Paths`, enter the path that leads to Isaac Lab's extension directory directory (`IsaacLab/source`)
+-    - Click on the **Hamburger Icon** (☰), then click `Refresh`.
+-
+-2. **Search and enable your extension**:
+-    - Find your extension under the `Third Party` category.
+-    - Toggle it to enable your extension.
+-
+-## Docker setup
+-
+-### Building Isaac Lab Base Image
+-
+-Currently, we don't have the Docker for Isaac Lab publicly available. Hence, you'd need to build the docker image
+-for Isaac Lab locally by following the steps [here](https://isaac-sim.github.io/IsaacLab/main/source/deployment/index.html).
+-
+-Once you have built the base Isaac Lab image, you can check it exists by doing:
+-
+-```bash
+-docker images
+-
+-# Output should look something like:
+-#
+-# REPOSITORY                       TAG       IMAGE ID       CREATED          SIZE
+-# isaac-lab-base                   latest    28be62af627e   32 minutes ago   18.9GB
+-```
+-
+-### Building Isaac Lab Template Image
+-
+-Following above, you can build the docker container for this project. It is called `isaac-lab-template`. However,
+-you can modify this name inside the [`docker/docker-compose.yaml`](docker/docker-compose.yaml).
+-
+-```bash
+-cd docker
+-docker compose --env-file .env.base --file docker-compose.yaml build isaac-lab-template
+-```
+-
+-You can verify the image is built successfully using the same command as earlier:
+-
+-```bash
+-docker images
+-
+-# Output should look something like:
+-#
+-# REPOSITORY                       TAG       IMAGE ID       CREATED             SIZE
+-# isaac-lab-template               latest    00b00b647e1b   2 minutes ago       18.9GB
+-# isaac-lab-base                   latest    892938acb55c   About an hour ago   18.9GB
+-```
+-
+-### Running the container
+-
+-After building, the usual next step is to start the containers associated with your services. You can do this with:
+-
+-```bash
+-docker compose --env-file .env.base --file docker-compose.yaml up
+-```
+-
+-This will start the services defined in your `docker-compose.yaml` file, including isaac-lab-template.
+-
+-If you want to run it in detached mode (in the background), use:
+-
+-```bash
+-docker compose --env-file .env.base --file docker-compose.yaml up -d
+-```
+-
+-### Interacting with a running container
+-
+-If you want to run commands inside the running container, you can use the `exec` command:
+-
+-```bash
+-docker exec --interactive --tty -e DISPLAY=${DISPLAY} isaac-lab-template /bin/bash
+-```
+-
+-### Shutting down the container
+-
+-When you are done or want to stop the running containers, you can bring down the services:
+-
+-```bash
+-docker compose --env-file .env.base --file docker-compose.yaml down
+-```
+-
+-This stops and removes the containers, but keeps the images.
+-
+-## Code formatting
+-
+-We have a pre-commit template to automatically format your code.
+-To install pre-commit:
+-
+-```bash
+-pip install pre-commit
+-```
+-
+-Then you can run pre-commit with:
+-
+-```bash
+-pre-commit run --all-files
+-```
+-
+-## Troubleshooting
+-
+-### Pylance Missing Indexing of Extensions
+-
+-In some VsCode versions, the indexing of part of the extensions is missing. In this case, add the path to your extension in `.vscode/settings.json` under the key `"python.analysis.extraPaths"`.
+-
+-```json
+-{
+-    "python.analysis.extraPaths": [
+-        "<path-to-ext-repo>/source/ext_template"
+-    ]
+-}
+-```
+-
+-### Pylance Crash
+-
+-If you encounter a crash in `pylance`, it is probable that too many files are indexed and you run out of memory.
+-A possible solution is to exclude some of omniverse packages that are not used in your project.
+-To do so, modify `.vscode/settings.json` and comment out packages under the key `"python.analysis.extraPaths"`
+-Some examples of packages that can likely be excluded are:
+-
+-```json
+-"<path-to-isaac-sim>/extscache/omni.anim.*"         // Animation packages
+-"<path-to-isaac-sim>/extscache/omni.kit.*"          // Kit UI tools
+-"<path-to-isaac-sim>/extscache/omni.graph.*"        // Graph UI tools
+-"<path-to-isaac-sim>/extscache/omni.services.*"     // Services tools
+-...
+-```
+diff --git a/docker/Dockerfile b/docker/Dockerfile
+index 1785c44..6801ea7 100644
+--- a/docker/Dockerfile
++++ b/docker/Dockerfile
+@@ -13,8 +13,8 @@ COPY ../ ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}
+ 
+ # # Install whatever you need as additional dependencies.
+ RUN bash -i -c "source ${HOME}/.bashrc && \
+-    cd ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}/source/ext_template && \
+-    pip install -e ."
++    cd ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}/source/cassie && pip install -e . && \
++    cd ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}/source/go2 && pip install -e . --no-deps"
+ 
+ # make working directory as the Isaac Lab directory
+ # this is the default directory when the container is run
+diff --git a/pyproject.toml b/pyproject.toml
+index 8905644..dd58be2 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -56,7 +56,7 @@ known_isaaclabparty = [
+ ]
+ 
+ # Modify the following to include the package names of your first-party code
+-known_firstparty = "ext_template"
++known_firstparty = "sim2sim"
+ known_local_folder = "config"
+ 
+ [tool.pyright]
+diff --git a/scripts/list_envs.py b/scripts/list_envs.py
+index 02b0c97..d481206 100644
+--- a/scripts/list_envs.py
++++ b/scripts/list_envs.py
+@@ -20,7 +20,7 @@ import gymnasium as gym
+ from prettytable import PrettyTable
+ 
+ # Import extensions to set up environment tasks
+-import ext_template.tasks  # noqa: F401
++import sim2sim.tasks  # noqa: F401
+ 
+ 
+ def main():
+diff --git a/scripts/rsl_rl/play.py b/scripts/rsl_rl/play.py
+index e381348..98e9983 100644
+--- a/scripts/rsl_rl/play.py
++++ b/scripts/rsl_rl/play.py
+@@ -18,6 +18,7 @@ parser.add_argument(
+ )
+ parser.add_argument("--num_envs", type=int, default=None, help="Number of environments to simulate.")
+ parser.add_argument("--task", type=str, default=None, help="Name of the task.")
++# Note: --checkpoint is added by cli_args.add_rsl_rl_args() below
+ # append RSL-RL cli arguments
+ cli_args.add_rsl_rl_args(parser)
+ # append AppLauncher cli args
+@@ -45,7 +46,25 @@ from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper, expor
+ from isaaclab_tasks.utils import get_checkpoint_path, parse_env_cfg
+ 
+ # Import extensions to set up environment tasks
+-import ext_template.tasks  # noqa: F401
++# Try pip-installed packages first, fall back to source paths
++import sys
++_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
++try:
++    import cassie  # noqa: F401
++except ImportError:
++    sys.path.insert(0, os.path.join(_project_root, "source", "cassie"))
++    try:
++        import cassie  # noqa: F401
++    except ImportError:
++        pass
++try:
++    import go2  # noqa: F401
++except ImportError:
++    sys.path.insert(0, os.path.join(_project_root, "source", "go2"))
++    try:
++        import go2  # noqa: F401
++    except ImportError:
++        pass
+ 
+ 
+ def main():
+@@ -56,11 +75,18 @@ def main():
+     )
+     agent_cfg: RslRlOnPolicyRunnerCfg = cli_args.parse_rsl_rl_cfg(args_cli.task, args_cli)
+ 
+-    # specify directory for logging experiments
+-    log_root_path = os.path.join("logs", "rsl_rl", agent_cfg.experiment_name)
++    # specify directory for logging experiments: logs/{robot}/rsl_rl/{experiment_name}
++    robot_name = agent_cfg.experiment_name.split("_")[0]  # e.g. "go2" from "go2_sim2sim"
++    log_root_path = os.path.join("logs", robot_name, "rsl_rl", agent_cfg.experiment_name)
+     log_root_path = os.path.abspath(log_root_path)
+-    print(f"[INFO] Loading experiment from directory: {log_root_path}")
+-    resume_path = get_checkpoint_path(log_root_path, agent_cfg.load_run, agent_cfg.load_checkpoint)
++
++    # Get checkpoint path - use --checkpoint if provided, otherwise use default discovery
++    if args_cli.checkpoint:
++        resume_path = os.path.abspath(args_cli.checkpoint)
++        print(f"[INFO] Loading checkpoint from: {resume_path}")
++    else:
++        print(f"[INFO] Loading experiment from directory: {log_root_path}")
++        resume_path = get_checkpoint_path(log_root_path, agent_cfg.load_run, agent_cfg.load_checkpoint)
+     log_dir = os.path.dirname(resume_path)
+ 
+     # create isaac environment
+@@ -94,11 +120,15 @@ def main():
+ 
+     # export policy to onnx/jit
+     export_model_dir = os.path.join(os.path.dirname(resume_path), "exported")
++    try:
++        actor_critic = ppo_runner.alg.actor_critic
++    except AttributeError:
++        actor_critic = ppo_runner.alg.policy
+     export_policy_as_jit(
+-        ppo_runner.alg.actor_critic, ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.pt"
++        actor_critic, ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.pt"
+     )
+     export_policy_as_onnx(
+-        ppo_runner.alg.actor_critic, normalizer=ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.onnx"
++        actor_critic, normalizer=ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.onnx"
+     )
+ 
+     # reset environment
+diff --git a/scripts/rsl_rl/train.py b/scripts/rsl_rl/train.py
+index b6e37f4..19c5dfd 100644
+--- a/scripts/rsl_rl/train.py
++++ b/scripts/rsl_rl/train.py
+@@ -20,7 +20,7 @@ import cli_args  # isort: skip
+ parser = argparse.ArgumentParser(description="Train an RL agent with RSL-RL.")
+ parser.add_argument("--video", action="store_true", default=False, help="Record videos during training.")
+ parser.add_argument("--video_length", type=int, default=200, help="Length of the recorded video (in steps).")
+-parser.add_argument("--video_interval", type=int, default=2000, help="Interval between video recordings (in steps).")
++parser.add_argument("--video_interval", type=int, default=5000, help="Interval between video recordings (in steps).")
+ parser.add_argument("--num_envs", type=int, default=None, help="Number of environments to simulate.")
+ parser.add_argument("--task", type=str, default=None, help="Name of the task.")
+ parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
+@@ -65,7 +65,25 @@ from isaaclab_tasks.utils import get_checkpoint_path
+ from isaaclab_tasks.utils.hydra import hydra_task_config
+ 
+ # Import extensions to set up environment tasks
+-import ext_template.tasks  # noqa: F401
++# Try pip-installed packages first, fall back to source paths
++import sys
++_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
++try:
++    import cassie  # noqa: F401
++except ImportError:
++    sys.path.insert(0, os.path.join(_project_root, "source", "cassie"))
++    try:
++        import cassie  # noqa: F401
++    except ImportError:
++        pass
++try:
++    import go2  # noqa: F401
++except ImportError:
++    sys.path.insert(0, os.path.join(_project_root, "source", "go2"))
++    try:
++        import go2  # noqa: F401
++    except ImportError:
++        pass
+ 
+ torch.backends.cuda.matmul.allow_tf32 = True
+ torch.backends.cudnn.allow_tf32 = True
+@@ -88,8 +106,9 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+     env_cfg.seed = agent_cfg.seed
+     env_cfg.sim.device = args_cli.device if args_cli.device is not None else env_cfg.sim.device
+ 
+-    # specify directory for logging experiments
+-    log_root_path = os.path.join("logs", "rsl_rl", agent_cfg.experiment_name)
++    # specify directory for logging experiments: logs/{robot}/rsl_rl/{experiment_name}
++    robot_name = agent_cfg.experiment_name.split("_")[0]  # e.g. "go2" from "go2_sim2sim"
++    log_root_path = os.path.join("logs", robot_name, "rsl_rl", agent_cfg.experiment_name)
+     log_root_path = os.path.abspath(log_root_path)
+     print(f"[INFO] Logging experiment in directory: {log_root_path}")
+     # specify directory for logging runs: {time-stamp}_{run_name}
+@@ -124,10 +143,15 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+     # write git state to logs
+     runner.add_git_repo_to_log(__file__)
+     # save resume path before creating a new log_dir
++    # save resume path before creating a new log_dir
+     if agent_cfg.resume:
+         # get path to previous checkpoint
+-        resume_path = get_checkpoint_path(log_root_path, agent_cfg.load_run, agent_cfg.load_checkpoint)
+-        print(f"[INFO]: Loading model checkpoint from: {resume_path}")
++        if os.path.isabs(agent_cfg.load_checkpoint):
++            resume_path = agent_cfg.load_checkpoint
++            print(f"[INFO]: Loading model checkpoint from absolute path: {resume_path}")
++        else:
++            resume_path = get_checkpoint_path(log_root_path, agent_cfg.load_run, agent_cfg.load_checkpoint)
++            print(f"[INFO]: Loading model checkpoint from: {resume_path}")
+         # load previously trained model
+         runner.load(resume_path)
+ 
+diff --git a/source/ext_template/config/extension.toml b/source/ext_template/config/extension.toml
+deleted file mode 100644
+index ffdd37d..0000000
+--- a/source/ext_template/config/extension.toml
++++ /dev/null
+@@ -1,35 +0,0 @@
+-[package]
+-
+-# Semantic Versioning is used: https://semver.org/
+-version = "0.1.0"
+-
+-# Description
+-category = "isaaclab"
+-readme  = "README.md"
+-
+-title = "Extension Template"
+-author = "Isaac Lab Project Developers"
+-maintainer = "Isaac Lab Project Developers"
+-description="Extension Template for Isaac Lab"
+-repository = "https://github.com/isaac-sim/IsaacLabExtensionTemplate.git"
+-keywords = ["extension", "template", "isaaclab"]
+-
+-[dependencies]
+-"isaaclab" = {}
+-"isaaclab_assets" = {}
+-"isaaclab_mimic" = {}
+-"isaaclab_rl" = {}
+-"isaaclab_tasks" = {}
+-# NOTE: Add additional dependencies here
+-
+-[[python.module]]
+-name = "ext_template"
+-
+-[isaaclab_settings]
+-# TODO: Uncomment and list any apt dependencies here.
+-#       If none, leave it commented out.
+-# apt_deps = ["example_package"]
+-# TODO: Uncomment and provide path to a ros_ws
+-#       with rosdeps to be installed. If none,
+-#       leave it commented out.
+-# ros_ws = "path/from/extension_root/to/ros_ws"
+diff --git a/source/ext_template/docs/CHANGELOG.rst b/source/ext_template/docs/CHANGELOG.rst
+deleted file mode 100644
+index 0a5dd3a..0000000
+--- a/source/ext_template/docs/CHANGELOG.rst
++++ /dev/null
+@@ -1,10 +0,0 @@
+-Changelog
+----------
+-
+-0.1.0 (2024-01-29)
+-~~~~~~~~~~~~~~~~~~
+-
+-Added
+-^^^^^
+-
+-* Created an initial template for building an extension or project based on Isaac Lab
+diff --git a/source/ext_template/ext_template/__init__.py b/source/ext_template/ext_template/__init__.py
+deleted file mode 100644
+index 4f1d8e9..0000000
+--- a/source/ext_template/ext_template/__init__.py
++++ /dev/null
+@@ -1,9 +0,0 @@
+-"""
+-Python module serving as a project/extension template.
+-"""
+-
+-# Register Gym environments.
+-from .tasks import *
+-
+-# Register UI extensions.
+-from .ui_extension_example import *
+diff --git a/source/ext_template/ext_template/tasks/__init__.py b/source/ext_template/ext_template/tasks/__init__.py
+deleted file mode 100644
+index 34f2657..0000000
+--- a/source/ext_template/ext_template/tasks/__init__.py
++++ /dev/null
+@@ -1,16 +0,0 @@
+-"""Package containing task implementations for various robotic environments."""
+-
+-import os
+-import toml
+-
+-from isaaclab_tasks.utils import import_packages
+-
+-##
+-# Register Gym environments.
+-##
+-
+-
+-# The blacklist is used to prevent importing configs from sub-packages
+-_BLACKLIST_PKGS = ["utils"]
+-# Import all configs in this package
+-import_packages(__name__, _BLACKLIST_PKGS)
+diff --git a/source/ext_template/ext_template/tasks/locomotion/__init__.py b/source/ext_template/ext_template/tasks/locomotion/__init__.py
+deleted file mode 100644
+index ee02789..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/__init__.py
++++ /dev/null
+@@ -1,3 +0,0 @@
+-"""Locomotion environments for legged robots."""
+-
+-from .velocity import *  # noqa
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/__init__.py b/source/ext_template/ext_template/tasks/locomotion/velocity/__init__.py
+deleted file mode 100644
+index a8dd40a..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/__init__.py
++++ /dev/null
+@@ -1,7 +0,0 @@
+-"""Locomotion environments with velocity-tracking commands.
+-
+-These environments are based on the `legged_gym` environments provided by Rudin et al.
+-
+-Reference:
+-    https://github.com/leggedrobotics/legged_gym
+-"""
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/config/__init__.py b/source/ext_template/ext_template/tasks/locomotion/velocity/config/__init__.py
+deleted file mode 100644
+index c751916..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/config/__init__.py
++++ /dev/null
+@@ -1,4 +0,0 @@
+-"""Configurations for velocity-based locomotion environments."""
+-
+-# We leave this file empty since we don't want to expose any configs in this package directly.
+-# We still need this file to import the "config" module in the parent package.
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/__init__.py b/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/__init__.py
+deleted file mode 100644
+index 2d40155..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/__init__.py
++++ /dev/null
+@@ -1,47 +0,0 @@
+-import gymnasium as gym
+-
+-from . import agents, flat_env_cfg, rough_env_cfg
+-
+-##
+-# Register Gym environments.
+-##
+-
+-gym.register(
+-    id="Template-Isaac-Velocity-Flat-Anymal-D-v0",
+-    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+-    disable_env_checker=True,
+-    kwargs={
+-        "env_cfg_entry_point": flat_env_cfg.AnymalDFlatEnvCfg,
+-        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:AnymalDFlatPPORunnerCfg",
+-    },
+-)
+-
+-gym.register(
+-    id="Template-Isaac-Velocity-Flat-Anymal-D-Play-v0",
+-    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+-    disable_env_checker=True,
+-    kwargs={
+-        "env_cfg_entry_point": flat_env_cfg.AnymalDFlatEnvCfg_PLAY,
+-        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:AnymalDFlatPPORunnerCfg",
+-    },
+-)
+-
+-gym.register(
+-    id="Template-Isaac-Velocity-Rough-Anymal-D-v0",
+-    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+-    disable_env_checker=True,
+-    kwargs={
+-        "env_cfg_entry_point": rough_env_cfg.AnymalDRoughEnvCfg,
+-        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:AnymalDRoughPPORunnerCfg",
+-    },
+-)
+-
+-gym.register(
+-    id="Template-Isaac-Velocity-Rough-Anymal-D-Play-v0",
+-    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+-    disable_env_checker=True,
+-    kwargs={
+-        "env_cfg_entry_point": rough_env_cfg.AnymalDRoughEnvCfg_PLAY,
+-        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:AnymalDRoughPPORunnerCfg",
+-    },
+-)
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/agents/__init__.py b/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/agents/__init__.py
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/agents/rsl_rl_ppo_cfg.py b/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/agents/rsl_rl_ppo_cfg.py
+deleted file mode 100644
+index 598a0f5..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/agents/rsl_rl_ppo_cfg.py
++++ /dev/null
+@@ -1,42 +0,0 @@
+-from isaaclab.utils import configclass
+-from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
+-
+-
+-@configclass
+-class AnymalDRoughPPORunnerCfg(RslRlOnPolicyRunnerCfg):
+-    num_steps_per_env = 24
+-    max_iterations = 1500
+-    save_interval = 50
+-    experiment_name = "anymal_d_rough"
+-    empirical_normalization = False
+-    policy = RslRlPpoActorCriticCfg(
+-        init_noise_std=1.0,
+-        actor_hidden_dims=[512, 256, 128],
+-        critic_hidden_dims=[512, 256, 128],
+-        activation="elu",
+-    )
+-    algorithm = RslRlPpoAlgorithmCfg(
+-        value_loss_coef=1.0,
+-        use_clipped_value_loss=True,
+-        clip_param=0.2,
+-        entropy_coef=0.005,
+-        num_learning_epochs=5,
+-        num_mini_batches=4,
+-        learning_rate=1.0e-3,
+-        schedule="adaptive",
+-        gamma=0.99,
+-        lam=0.95,
+-        desired_kl=0.01,
+-        max_grad_norm=1.0,
+-    )
+-
+-
+-@configclass
+-class AnymalDFlatPPORunnerCfg(AnymalDRoughPPORunnerCfg):
+-    def __post_init__(self):
+-        super().__post_init__()
+-
+-        self.max_iterations = 300
+-        self.experiment_name = "anymal_d_flat"
+-        self.policy.actor_hidden_dims = [128, 128, 128]
+-        self.policy.critic_hidden_dims = [128, 128, 128]
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/flat_env_cfg.py b/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/flat_env_cfg.py
+deleted file mode 100644
+index 307f127..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/flat_env_cfg.py
++++ /dev/null
+@@ -1,38 +0,0 @@
+-from isaaclab.utils import configclass
+-
+-from .rough_env_cfg import AnymalDRoughEnvCfg
+-
+-
+-@configclass
+-class AnymalDFlatEnvCfg(AnymalDRoughEnvCfg):
+-    def __post_init__(self):
+-        # post init of parent
+-        super().__post_init__()
+-
+-        # override rewards
+-        self.rewards.flat_orientation_l2.weight = -5.0
+-        self.rewards.dof_torques_l2.weight = -2.5e-5
+-        self.rewards.feet_air_time.weight = 0.5
+-        # change terrain to flat
+-        self.scene.terrain.terrain_type = "plane"
+-        self.scene.terrain.terrain_generator = None
+-        # no height scan
+-        self.scene.height_scanner = None
+-        self.observations.policy.height_scan = None
+-        # no terrain curriculum
+-        self.curriculum.terrain_levels = None
+-
+-
+-class AnymalDFlatEnvCfg_PLAY(AnymalDFlatEnvCfg):
+-    def __post_init__(self) -> None:
+-        # post init of parent
+-        super().__post_init__()
+-
+-        # make a smaller scene for play
+-        self.scene.num_envs = 50
+-        self.scene.env_spacing = 2.5
+-        # disable randomization for play
+-        self.observations.policy.enable_corruption = False
+-        # remove random pushing
+-        self.events.base_external_force_torque = None
+-        self.events.push_robot = None
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/rough_env_cfg.py b/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/rough_env_cfg.py
+deleted file mode 100644
+index 289b07f..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/config/anymal_d/rough_env_cfg.py
++++ /dev/null
+@@ -1,41 +0,0 @@
+-from isaaclab.utils import configclass
+-
+-from ext_template.tasks.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg
+-
+-##
+-# Pre-defined configs
+-##
+-from isaaclab_assets.robots.anymal import ANYMAL_D_CFG  # isort: skip
+-
+-
+-@configclass
+-class AnymalDRoughEnvCfg(LocomotionVelocityRoughEnvCfg):
+-    def __post_init__(self):
+-        # post init of parent
+-        super().__post_init__()
+-        # switch robot to anymal-d
+-        self.scene.robot = ANYMAL_D_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
+-
+-
+-@configclass
+-class AnymalDRoughEnvCfg_PLAY(AnymalDRoughEnvCfg):
+-    def __post_init__(self):
+-        # post init of parent
+-        super().__post_init__()
+-
+-        # make a smaller scene for play
+-        self.scene.num_envs = 50
+-        self.scene.env_spacing = 2.5
+-        # spawn the robot randomly in the grid (instead of their terrain levels)
+-        self.scene.terrain.max_init_terrain_level = None
+-        # reduce the number of terrains to save memory
+-        if self.scene.terrain.terrain_generator is not None:
+-            self.scene.terrain.terrain_generator.num_rows = 5
+-            self.scene.terrain.terrain_generator.num_cols = 5
+-            self.scene.terrain.terrain_generator.curriculum = False
+-
+-        # disable randomization for play
+-        self.observations.policy.enable_corruption = False
+-        # remove random pushing
+-        self.events.base_external_force_torque = None
+-        self.events.push_robot = None
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/__init__.py b/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/__init__.py
+deleted file mode 100644
+index d00e381..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/__init__.py
++++ /dev/null
+@@ -1,6 +0,0 @@
+-"""This sub-module contains the functions that are specific to the locomotion environments."""
+-
+-from isaaclab.envs.mdp import *  # noqa: F401, F403
+-
+-from .curriculums import *  # noqa: F401, F403
+-from .rewards import *  # noqa: F401, F403
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/curriculums.py b/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/curriculums.py
+deleted file mode 100644
+index c72eabd..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/curriculums.py
++++ /dev/null
+@@ -1,50 +0,0 @@
+-"""Common functions that can be used to create curriculum for the learning environment.
+-
+-The functions can be passed to the :class:`isaaclab.managers.CurriculumTermCfg` object to enable
+-the curriculum introduced by the function.
+-"""
+-
+-from __future__ import annotations
+-
+-import torch
+-from collections.abc import Sequence
+-from typing import TYPE_CHECKING
+-
+-from isaaclab.assets import Articulation
+-from isaaclab.managers import SceneEntityCfg
+-from isaaclab.terrains import TerrainImporter
+-
+-if TYPE_CHECKING:
+-    from isaaclab.envs import RLTaskEnv
+-
+-
+-def terrain_levels_vel(
+-    env: RLTaskEnv, env_ids: Sequence[int], asset_cfg: SceneEntityCfg = SceneEntityCfg("robot")
+-) -> torch.Tensor:
+-    """Curriculum based on the distance the robot walked when commanded to move at a desired velocity.
+-
+-    This term is used to increase the difficulty of the terrain when the robot walks far enough and decrease the
+-    difficulty when the robot walks less than half of the distance required by the commanded velocity.
+-
+-    .. note::
+-        It is only possible to use this term with the terrain type ``generator``. For further information
+-        on different terrain types, check the :class:`isaaclab.terrains.TerrainImporter` class.
+-
+-    Returns:
+-        The mean terrain level for the given environment ids.
+-    """
+-    # extract the used quantities (to enable type-hinting)
+-    asset: Articulation = env.scene[asset_cfg.name]
+-    terrain: TerrainImporter = env.scene.terrain
+-    command = env.command_manager.get_command("base_velocity")
+-    # compute the distance the robot walked
+-    distance = torch.norm(asset.data.root_pos_w[env_ids, :2] - env.scene.env_origins[env_ids, :2], dim=1)
+-    # robots that walked far enough progress to harder terrains
+-    move_up = distance > terrain.cfg.terrain_generator.size[0] / 2
+-    # robots that walked less than half of their required distance go to simpler terrains
+-    move_down = distance < torch.norm(command[env_ids, :2], dim=1) * env.max_episode_length_s * 0.5
+-    move_down *= ~move_up
+-    # update terrain levels
+-    terrain.update_env_origins(env_ids, move_up, move_down)
+-    # return the mean terrain level
+-    return torch.mean(terrain.terrain_levels.float())
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/rewards.py b/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/rewards.py
+deleted file mode 100644
+index 658a489..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/mdp/rewards.py
++++ /dev/null
+@@ -1,56 +0,0 @@
+-from __future__ import annotations
+-
+-import torch
+-from typing import TYPE_CHECKING
+-
+-from isaaclab.managers import SceneEntityCfg
+-from isaaclab.sensors import ContactSensor
+-
+-if TYPE_CHECKING:
+-    from isaaclab.envs import ManagerBasedRLEnv
+-
+-
+-def feet_air_time(
+-    env: ManagerBasedRLEnv, command_name: str, sensor_cfg: SceneEntityCfg, threshold: float
+-) -> torch.Tensor:
+-    """Reward long steps taken by the feet using L2-kernel.
+-
+-    This function rewards the agent for taking steps that are longer than a threshold. This helps ensure
+-    that the robot lifts its feet off the ground and takes steps. The reward is computed as the sum of
+-    the time for which the feet are in the air.
+-
+-    If the commands are small (i.e. the agent is not supposed to take a step), then the reward is zero.
+-    """
+-    # extract the used quantities (to enable type-hinting)
+-    contact_sensor: ContactSensor = env.scene.sensors[sensor_cfg.name]
+-    # compute the reward
+-    first_contact = contact_sensor.compute_first_contact(env.step_dt)[:, sensor_cfg.body_ids]
+-    last_air_time = contact_sensor.data.last_air_time[:, sensor_cfg.body_ids]
+-    reward = torch.sum((last_air_time - threshold) * first_contact, dim=1)
+-    # no reward for zero command
+-    reward *= torch.norm(env.command_manager.get_command(command_name)[:, :2], dim=1) > 0.1
+-    return reward
+-
+-
+-def feet_air_time_positive_biped(
+-    env: ManagerBasedRLEnv, command_name: str, threshold: float, sensor_cfg: SceneEntityCfg
+-) -> torch.Tensor:
+-    """Reward long steps taken by the feet for bipeds.
+-
+-    This function rewards the agent for taking steps up to a specified threshold and also keep one foot at
+-    a time in the air.
+-
+-    If the commands are small (i.e. the agent is not supposed to take a step), then the reward is zero.
+-    """
+-    contact_sensor: ContactSensor = env.scene.sensors[sensor_cfg.name]
+-    # compute the reward
+-    air_time = contact_sensor.data.current_air_time[:, sensor_cfg.body_ids]
+-    contact_time = contact_sensor.data.current_contact_time[:, sensor_cfg.body_ids]
+-    in_contact = contact_time > 0.0
+-    in_mode_time = torch.where(in_contact, contact_time, air_time)
+-    single_stance = torch.sum(in_contact.int(), dim=1) == 1
+-    reward = torch.min(torch.where(single_stance.unsqueeze(-1), in_mode_time, 0.0), dim=1)[0]
+-    reward = torch.clamp(reward, max=threshold)
+-    # no reward for zero command
+-    reward *= torch.norm(env.command_manager.get_command(command_name)[:, :2], dim=1) > 0.1
+-    return reward
+diff --git a/source/ext_template/ext_template/tasks/locomotion/velocity/velocity_env_cfg.py b/source/ext_template/ext_template/tasks/locomotion/velocity/velocity_env_cfg.py
+deleted file mode 100644
+index 27a3ea7..0000000
+--- a/source/ext_template/ext_template/tasks/locomotion/velocity/velocity_env_cfg.py
++++ /dev/null
+@@ -1,317 +0,0 @@
+-from __future__ import annotations
+-
+-import math
+-from dataclasses import MISSING
+-
+-import isaaclab.sim as sim_utils
+-from isaaclab.assets import ArticulationCfg, AssetBaseCfg
+-from isaaclab.envs import ManagerBasedRLEnvCfg
+-from isaaclab.managers import CurriculumTermCfg as CurrTerm
+-from isaaclab.managers import EventTermCfg as EventTerm
+-from isaaclab.managers import ObservationGroupCfg as ObsGroup
+-from isaaclab.managers import ObservationTermCfg as ObsTerm
+-from isaaclab.managers import RewardTermCfg as RewTerm
+-from isaaclab.managers import SceneEntityCfg
+-from isaaclab.managers import TerminationTermCfg as DoneTerm
+-from isaaclab.scene import InteractiveSceneCfg
+-from isaaclab.sensors import ContactSensorCfg, RayCasterCfg, patterns
+-from isaaclab.terrains import TerrainImporterCfg
+-from isaaclab.utils import configclass
+-from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+-
+-import ext_template.tasks.locomotion.velocity.mdp as mdp
+-
+-##
+-# Pre-defined configs
+-##
+-from isaaclab.terrains.config.rough import ROUGH_TERRAINS_CFG  # isort: skip
+-
+-
+-##
+-# Scene definition
+-##
+-
+-
+-@configclass
+-class MySceneCfg(InteractiveSceneCfg):
+-    """Configuration for the terrain scene with a legged robot."""
+-
+-    # ground terrain
+-    terrain = TerrainImporterCfg(
+-        prim_path="/World/ground",
+-        terrain_type="generator",
+-        terrain_generator=ROUGH_TERRAINS_CFG,
+-        max_init_terrain_level=5,
+-        collision_group=-1,
+-        physics_material=sim_utils.RigidBodyMaterialCfg(
+-            friction_combine_mode="multiply",
+-            restitution_combine_mode="multiply",
+-            static_friction=1.0,
+-            dynamic_friction=1.0,
+-        ),
+-        visual_material=sim_utils.MdlFileCfg(
+-            mdl_path="{NVIDIA_NUCLEUS_DIR}/Materials/Base/Architecture/Shingles_01.mdl",
+-            project_uvw=True,
+-        ),
+-        debug_vis=False,
+-    )
+-    # robots
+-    robot: ArticulationCfg = MISSING
+-    # sensors
+-    height_scanner = RayCasterCfg(
+-        prim_path="{ENV_REGEX_NS}/Robot/base",
+-        offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 20.0)),
+-        attach_yaw_only=True,
+-        pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
+-        debug_vis=False,
+-        mesh_prim_paths=["/World/ground"],
+-    )
+-    contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, track_air_time=True)
+-    # lights
+-    light = AssetBaseCfg(
+-        prim_path="/World/light",
+-        spawn=sim_utils.DistantLightCfg(color=(0.75, 0.75, 0.75), intensity=3000.0),
+-    )
+-    sky_light = AssetBaseCfg(
+-        prim_path="/World/skyLight",
+-        spawn=sim_utils.DomeLightCfg(color=(0.13, 0.13, 0.13), intensity=1000.0),
+-    )
+-
+-
+-##
+-# MDP settings
+-##
+-
+-
+-@configclass
+-class CommandsCfg:
+-    """Command specifications for the MDP."""
+-
+-    base_velocity = mdp.UniformVelocityCommandCfg(
+-        asset_name="robot",
+-        resampling_time_range=(10.0, 10.0),
+-        rel_standing_envs=0.02,
+-        rel_heading_envs=1.0,
+-        heading_command=True,
+-        heading_control_stiffness=0.5,
+-        debug_vis=True,
+-        ranges=mdp.UniformVelocityCommandCfg.Ranges(
+-            lin_vel_x=(-1.0, 1.0), lin_vel_y=(-1.0, 1.0), ang_vel_z=(-1.0, 1.0), heading=(-math.pi, math.pi)
+-        ),
+-    )
+-
+-
+-@configclass
+-class ActionsCfg:
+-    """Action specifications for the MDP."""
+-
+-    joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True)
+-
+-
+-@configclass
+-class ObservationsCfg:
+-    """Observation specifications for the MDP."""
+-
+-    @configclass
+-    class PolicyCfg(ObsGroup):
+-        """Observations for policy group."""
+-
+-        # observation terms (order preserved)
+-        base_lin_vel = ObsTerm(func=mdp.base_lin_vel, noise=Unoise(n_min=-0.1, n_max=0.1))
+-        base_ang_vel = ObsTerm(func=mdp.base_ang_vel, noise=Unoise(n_min=-0.2, n_max=0.2))
+-        projected_gravity = ObsTerm(
+-            func=mdp.projected_gravity,
+-            noise=Unoise(n_min=-0.05, n_max=0.05),
+-        )
+-        velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
+-        joint_pos = ObsTerm(func=mdp.joint_pos_rel, noise=Unoise(n_min=-0.01, n_max=0.01))
+-        joint_vel = ObsTerm(func=mdp.joint_vel_rel, noise=Unoise(n_min=-1.5, n_max=1.5))
+-        actions = ObsTerm(func=mdp.last_action)
+-        height_scan = ObsTerm(
+-            func=mdp.height_scan,
+-            params={"sensor_cfg": SceneEntityCfg("height_scanner")},
+-            noise=Unoise(n_min=-0.1, n_max=0.1),
+-            clip=(-1.0, 1.0),
+-        )
+-
+-        def __post_init__(self):
+-            self.enable_corruption = True
+-            self.concatenate_terms = True
+-
+-    # observation groups
+-    policy: PolicyCfg = PolicyCfg()
+-
+-
+-@configclass
+-class EventCfg:
+-    """Configuration for events."""
+-
+-    # startup
+-    physics_material = EventTerm(
+-        func=mdp.randomize_rigid_body_material,
+-        mode="startup",
+-        params={
+-            "asset_cfg": SceneEntityCfg("robot", body_names=".*"),
+-            "static_friction_range": (0.8, 0.8),
+-            "dynamic_friction_range": (0.6, 0.6),
+-            "restitution_range": (0.0, 0.0),
+-            "num_buckets": 64,
+-        },
+-    )
+-
+-    add_base_mass = EventTerm(
+-        func=mdp.randomize_rigid_body_mass,
+-        mode="startup",
+-        params={
+-            "asset_cfg": SceneEntityCfg("robot", body_names="base"),
+-            "mass_distribution_params": (-5.0, 5.0),
+-            "operation": "add",
+-        },
+-    )
+-
+-    # reset
+-    base_external_force_torque = EventTerm(
+-        func=mdp.apply_external_force_torque,
+-        mode="reset",
+-        params={
+-            "asset_cfg": SceneEntityCfg("robot", body_names="base"),
+-            "force_range": (0.0, 0.0),
+-            "torque_range": (-0.0, 0.0),
+-        },
+-    )
+-
+-    reset_base = EventTerm(
+-        func=mdp.reset_root_state_uniform,
+-        mode="reset",
+-        params={
+-            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
+-            "velocity_range": {
+-                "x": (-0.5, 0.5),
+-                "y": (-0.5, 0.5),
+-                "z": (-0.5, 0.5),
+-                "roll": (-0.5, 0.5),
+-                "pitch": (-0.5, 0.5),
+-                "yaw": (-0.5, 0.5),
+-            },
+-        },
+-    )
+-
+-    reset_robot_joints = EventTerm(
+-        func=mdp.reset_joints_by_scale,
+-        mode="reset",
+-        params={
+-            "position_range": (0.5, 1.5),
+-            "velocity_range": (0.0, 0.0),
+-        },
+-    )
+-
+-    # interval
+-    push_robot = EventTerm(
+-        func=mdp.push_by_setting_velocity,
+-        mode="interval",
+-        interval_range_s=(10.0, 15.0),
+-        params={"velocity_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5)}},
+-    )
+-
+-
+-@configclass
+-class RewardsCfg:
+-    """Reward terms for the MDP."""
+-
+-    # -- task
+-    track_lin_vel_xy_exp = RewTerm(
+-        func=mdp.track_lin_vel_xy_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+-    )
+-    track_ang_vel_z_exp = RewTerm(
+-        func=mdp.track_ang_vel_z_exp, weight=0.5, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+-    )
+-    # -- penalties
+-    lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-2.0)
+-    ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.05)
+-    dof_torques_l2 = RewTerm(func=mdp.joint_torques_l2, weight=-1.0e-5)
+-    dof_acc_l2 = RewTerm(func=mdp.joint_acc_l2, weight=-2.5e-7)
+-    action_rate_l2 = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
+-    feet_air_time = RewTerm(
+-        func=mdp.feet_air_time,
+-        weight=0.125,
+-        params={
+-            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*FOOT"),
+-            "command_name": "base_velocity",
+-            "threshold": 0.5,
+-        },
+-    )
+-    undesired_contacts = RewTerm(
+-        func=mdp.undesired_contacts,
+-        weight=-1.0,
+-        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*THIGH"), "threshold": 1.0},
+-    )
+-    # -- optional penalties
+-    flat_orientation_l2 = RewTerm(func=mdp.flat_orientation_l2, weight=0.0)
+-    dof_pos_limits = RewTerm(func=mdp.joint_pos_limits, weight=0.0)
+-
+-
+-@configclass
+-class TerminationsCfg:
+-    """Termination terms for the MDP."""
+-
+-    time_out = DoneTerm(func=mdp.time_out, time_out=True)
+-    base_contact = DoneTerm(
+-        func=mdp.illegal_contact,
+-        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base"), "threshold": 1.0},
+-    )
+-
+-
+-@configclass
+-class CurriculumCfg:
+-    """Curriculum terms for the MDP."""
+-
+-    terrain_levels = CurrTerm(func=mdp.terrain_levels_vel)
+-
+-
+-##
+-# Environment configuration
+-##
+-
+-
+-@configclass
+-class LocomotionVelocityRoughEnvCfg(ManagerBasedRLEnvCfg):
+-    """Configuration for the locomotion velocity-tracking environment."""
+-
+-    # Scene settings
+-    scene: MySceneCfg = MySceneCfg(num_envs=4096, env_spacing=2.5)
+-    # Basic settings
+-    observations: ObservationsCfg = ObservationsCfg()
+-    actions: ActionsCfg = ActionsCfg()
+-    commands: CommandsCfg = CommandsCfg()
+-    # MDP settings
+-    rewards: RewardsCfg = RewardsCfg()
+-    terminations: TerminationsCfg = TerminationsCfg()
+-    events: EventCfg = EventCfg()
+-    curriculum: CurriculumCfg = CurriculumCfg()
+-
+-    def __post_init__(self):
+-        """Post initialization."""
+-        # general settings
+-        self.decimation = 4
+-        self.episode_length_s = 20.0
+-        # simulation settings
+-        self.sim.dt = 0.005
+-        self.sim.render_interval = self.decimation
+-        self.sim.disable_contact_processing = True
+-        self.sim.physics_material = self.scene.terrain.physics_material
+-        self.sim.physx.gpu_max_rigid_patch_count = 10 * 2**15
+-        # update sensor update periods
+-        # we tick all the sensors based on the smallest update period (physics update period)
+-        if self.scene.height_scanner is not None:
+-            self.scene.height_scanner.update_period = self.decimation * self.sim.dt
+-        if self.scene.contact_forces is not None:
+-            self.scene.contact_forces.update_period = self.sim.dt
+-
+-        # check if terrain levels curriculum is enabled - if so, enable curriculum for terrain generator
+-        # this generates terrains with increasing difficulty and is useful for training
+-        if getattr(self.curriculum, "terrain_levels", None) is not None:
+-            if self.scene.terrain.terrain_generator is not None:
+-                self.scene.terrain.terrain_generator.curriculum = True
+-        else:
+-            if self.scene.terrain.terrain_generator is not None:
+-                self.scene.terrain.terrain_generator.curriculum = False
+diff --git a/source/ext_template/ext_template/ui_extension_example.py b/source/ext_template/ext_template/ui_extension_example.py
+deleted file mode 100644
+index e2c7051..0000000
+--- a/source/ext_template/ext_template/ui_extension_example.py
++++ /dev/null
+@@ -1,41 +0,0 @@
+-import omni.ext
+-
+-
+-# Functions and vars are available to other extension as usual in python: `example.python_ext.some_public_function(x)`
+-def some_public_function(x: int):
+-    print("[ext_template] some_public_function was called with x: ", x)
+-    return x**x
+-
+-
+-# Any class derived from `omni.ext.IExt` in top level module (defined in `python.modules` of `extension.toml`) will be
+-# instantiated when extension gets enabled and `on_startup(ext_id)` will be called. Later when extension gets disabled
+-# on_shutdown() is called.
+-class ExampleExtension(omni.ext.IExt):
+-    # ext_id is current extension id. It can be used with extension manager to query additional information, like where
+-    # this extension is located on filesystem.
+-    def on_startup(self, ext_id):
+-        print("[ext_template] startup")
+-
+-        self._count = 0
+-
+-        self._window = omni.ui.Window("My Window", width=300, height=300)
+-        with self._window.frame:
+-            with omni.ui.VStack():
+-                label = omni.ui.Label("")
+-
+-                def on_click():
+-                    self._count += 1
+-                    label.text = f"count: {self._count}"
+-
+-                def on_reset():
+-                    self._count = 0
+-                    label.text = "empty"
+-
+-                on_reset()
+-
+-                with omni.ui.HStack():
+-                    omni.ui.Button("Add", clicked_fn=on_click)
+-                    omni.ui.Button("Reset", clicked_fn=on_reset)
+-
+-    def on_shutdown(self):
+-        print("[ext_template] shutdown")
+diff --git a/source/ext_template/pyproject.toml b/source/ext_template/pyproject.toml
+deleted file mode 100644
+index d90ac35..0000000
+--- a/source/ext_template/pyproject.toml
++++ /dev/null
+@@ -1,3 +0,0 @@
+-[build-system]
+-requires = ["setuptools", "wheel", "toml"]
+-build-backend = "setuptools.build_meta"
+diff --git a/source/ext_template/setup.py b/source/ext_template/setup.py
+deleted file mode 100644
+index af2d16c..0000000
+--- a/source/ext_template/setup.py
++++ /dev/null
+@@ -1,39 +0,0 @@
+-"""Installation script for the 'ext_template' python package."""
+-
+-import os
+-import toml
+-
+-from setuptools import setup
+-
+-# Obtain the extension data from the extension.toml file
+-EXTENSION_PATH = os.path.dirname(os.path.realpath(__file__))
+-# Read the extension.toml file
+-EXTENSION_TOML_DATA = toml.load(os.path.join(EXTENSION_PATH, "config", "extension.toml"))
+-
+-# Minimum dependencies required prior to installation
+-INSTALL_REQUIRES = [
+-    # NOTE: Add dependencies
+-    "psutil",
+-]
+-
+-# Installation operation
+-setup(
+-    name="ext_template",
+-    packages=["ext_template"],
+-    author=EXTENSION_TOML_DATA["package"]["author"],
+-    maintainer=EXTENSION_TOML_DATA["package"]["maintainer"],
+-    url=EXTENSION_TOML_DATA["package"]["repository"],
+-    version=EXTENSION_TOML_DATA["package"]["version"],
+-    description=EXTENSION_TOML_DATA["package"]["description"],
+-    keywords=EXTENSION_TOML_DATA["package"]["keywords"],
+-    install_requires=INSTALL_REQUIRES,
+-    license="Apache 2.0",
+-    include_package_data=True,
+-    python_requires=">=3.10",
+-    classifiers=[
+-        "Natural Language :: English",
+-        "Programming Language :: Python :: 3.10",
+-        "Isaac Sim :: 4.5.0",
+-    ],
+-    zip_safe=False,
+-)

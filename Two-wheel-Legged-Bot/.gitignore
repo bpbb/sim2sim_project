@@ -35,6 +35,8 @@ outputs/
 *.tar.gz
 *.usd
 *.usda
+!main/lab/flamingo/assets/data/Robots/Flamingo/flamingo_rev03_1_1/**
+!main/lab/flamingo/assets/data/Robots/Flamingo/flamingo_rev03_1_1/*.zip
 
 # IDE
 .vscode/

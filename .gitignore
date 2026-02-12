@@ -61,7 +61,8 @@ exam2/
 _archive/
 
 # Two-wheel-Legged-Bot specific exclusions
-!Two-wheel-Legged-Bot/main/lab/flamingo/assets/data/Robots/Flamingo/flamingo_rev03_1_1/
+!Two-wheel-Legged-Bot/main/lab/flamingo/assets/data/Robots/Flamingo/flamingo_rev03_1_1/**
+!Two-wheel-Legged-Bot/main/lab/flamingo/assets/data/Robots/Flamingo/flamingo_rev03_1_1/*.zip
 !Two-wheel-Legged-Bot/main/logs/co_rl/Flamingo_Flat_Stand_Drive/ppo/2026-02-07_18-03-28/model_4999.pt
 Two-wheel-Legged-Bot/**/__pycache__/
 Two-wheel-Legged-Bot/**/*.pyc
